@@ -1,5 +1,7 @@
 # CCM Stack
 
+**English** · [Português (Brasil)](README.pt-BR.md)
+
 **Your coding agent agrees with every rule you write, then breaks it on a long task. CCM Stack enforces the rules a machine can check, teaches the ones that need judgment, and tells you out loud when the work is done.**
 
 Skills, hooks and a five-lesson course for Claude Code, Antigravity, Windsurf, Cursor, Codex, Gemini CLI and Copilot, by [Ciro Cesar Maciel](https://ciromaciel.click/?ref=oss-ccm-stack). macOS, Linux and Windows. MIT.
@@ -129,9 +131,9 @@ Five lessons of ten minutes. Each takes one real mistake, states the rule that p
 - Node.js 18 or newer. CCM Stack has no dependencies and installs nothing with a package manager.
 - For the voice: nothing extra on macOS and Windows. On Linux, `paplay` or `aplay`, and `speech-dispatcher` or `espeak-ng` for the fallback voice. `ffmpeg`, when present, speeds speech up without changing its pitch.
 
-Status by system: macOS verified; Linux verified; Windows built for, not yet verified on a real machine. If you run it on Windows, [tell us how it went](https://github.com/ciro-maciel/ccm-stack/issues).
+Status by system: macOS verified; Linux and Windows built for, not yet verified on a real machine. If you run it on Linux or Windows, [tell us how it went](https://github.com/ciro-maciel/ccm-stack/issues).
 
-The skills follow the open Agent Skills format, so editors that read `SKILL.md` files (Cursor among them) can use them too. The hooks are Claude Code's.
+The skills follow the open Agent Skills format, read by Claude Code, Antigravity, Windsurf, Cursor, Codex, Gemini CLI and Copilot. The hooks run in Claude Code, Cursor and Windsurf; git hooks cover every tool.
 
 ## Add your own rule
 
