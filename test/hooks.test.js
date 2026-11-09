@@ -92,7 +92,7 @@ test('a broken input never blocks the work', () => {
 
 test('the speaking worker is started only when there is a voice comment', () => {
 	const home = mkdtempSync(join(tmpdir(), 'ccm-test-'))
-	writeFileSync(join(home, 'config.json'), JSON.stringify({ voice: { isEnabled: true, engine: 'none' } }))
+	writeFileSync(join(home, 'config.json'), JSON.stringify({ voice: { isEnabled: true, engine: 'off' } }))
 	const env = { ...process.env, CCM_STACK_HOME: home }
 	const run = (message) =>
 		spawnSync(process.execPath, [join(ROOT, 'hooks', 'run.js')], { input: JSON.stringify({ hook_event_name: 'Stop', last_assistant_message: message }), env })

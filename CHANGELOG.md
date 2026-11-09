@@ -2,6 +2,12 @@
 
 All notable changes are listed here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and versions follow [Semantic Versioning](https://semver.org).
 
+## [1.5.1] - 2026-11-09
+
+### Fixed
+
+- The test suite spoke "The work is done" out loud on every run: its voice engine fell back to the system voice. The `off` engine is now silent, and the test uses it.
+
 ## [1.5.0] - 2026-11-09
 
 ### Added

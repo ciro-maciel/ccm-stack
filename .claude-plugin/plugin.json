@@ -1,6 +1,6 @@
 {
 	"name": "ccm-stack",
-	"version": "1.5.0",
+	"version": "1.5.1",
 	"description": "Skills, hooks and a five-lesson course that make your coding agent follow the rules it would otherwise skip, and tell you out loud when the work is done. macOS, Linux and Windows.",
 	"author": {
 		"name": "Ciro Cesar Maciel",
