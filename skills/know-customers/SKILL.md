@@ -1,6 +1,6 @@
 ---
 name: know-customers
-description: Know where every customer of an app is and what to do next, with Customers People by Ciro Cesar Maciel - create a source, send the app's own events (sign-up, activation, payment) signed the Standard Webhooks way, and read people and next steps in the conversation. Use for "who are my customers", "track sign-ups and payments", "which users are stuck", "a CRM for my app".
+description: Send an app's sign-ups, activations and payments to Ciro's Customers People and read where each customer is. Use for customer tracking or a CRM.
 ---
 
 # Know your customers

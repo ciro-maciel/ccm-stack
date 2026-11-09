@@ -1,6 +1,6 @@
 ---
 name: mac-app
-description: Build native Mac apps that behave - start only in the menu bar when macOS opens them at login, one window with a sidebar instead of extra windows, a template menu bar icon, and versioned installs. Use when building or changing a macOS app in Swift or SwiftUI, its login item, menu bar icon or window structure.
+description: Mac apps that open at login in the menu bar only, one window, template icon, versioned installs. Use for any macOS app.
 ---
 
 # Mac apps done right

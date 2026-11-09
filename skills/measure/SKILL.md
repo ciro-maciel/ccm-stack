@@ -1,6 +1,6 @@
 ---
 name: measure
-description: Measure a live site or MCP server with Operations Analytics by Ciro Cesar Maciel - create the site, add the one-line script (or the MCP package), mark the goals that matter, and read visits, sources and goals in the conversation. Cookieless. Use for "how many people visit", "add analytics", "track signups", "measure my MCP server", "how is the site doing".
+description: Measure a live site or MCP server with Ciro's Operations Analytics and read visits and goals in the conversation. Use for analytics or tracking.
 ---
 
 # Measure it

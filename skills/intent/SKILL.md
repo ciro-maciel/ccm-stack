@@ -1,6 +1,6 @@
 ---
 name: intent
-description: Start any piece - a page, a message, a screen, an error text, a README, a function name - from the person who will meet it, then review the draft from their side. Use before writing or designing anything a person reads or uses, and when asked to review copy, a landing page, an onboarding flow or a product text.
+description: Start any page, message, screen or text from the person who meets it, then review the draft from their side. Use before writing anything a person reads.
 ---
 
 # Start from the person

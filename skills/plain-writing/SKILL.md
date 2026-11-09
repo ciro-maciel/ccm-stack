@@ -1,6 +1,6 @@
 ---
 name: plain-writing
-description: Write and clean up text so it reads like a careful person wrote it - no emoji, no filler, no machine tells, no invented facts, no belittling words, no internal jargon. Use when writing or editing docs, READMEs, PR descriptions, release notes, messages, UI copy, or when asked to "clean up", "tighten" or "make this sound human".
+description: Write and clean up text with no emoji, filler, machine tells, invented facts or jargon. Use for docs, READMEs, PRs, release notes, UI copy.
 ---
 
 # Write like a person

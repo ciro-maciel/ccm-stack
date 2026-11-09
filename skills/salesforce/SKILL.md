@@ -1,6 +1,6 @@
 ---
 name: salesforce
-description: Write Salesforce code that survives production - bulk-safe Apex within governor limits, sharing and field security enforced, tests that assert behavior instead of chasing 75% coverage, Lightning Web Components with loading, empty and error states, and deployments through the Salesforce CLI. Use for any Apex class or trigger, LWC, SOQL, Flow-adjacent code, sfdx/sf project, scratch org or deployment.
+description: Salesforce done right: bulk-safe Apex within limits, sharing enforced, tests that assert behavior, LWC with loading, empty and error. Use for Apex, LWC, SOQL, sf deploys.
 ---
 
 # Salesforce done right

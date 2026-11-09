@@ -1,6 +1,6 @@
 ---
 name: status
-description: Show every CCM Stack rule, the lesson that teaches it, what enforces it and whether it runs on this machine; turn rules or the voice on and off. Use for /ccm-stack:status, "which rules are on", "turn off rule X", "stop the voice", "ccm doctor".
+description: Show every CCM Stack rule and what enforces it; turn rules or the voice on and off; ccm doctor. Use for /ccm-stack:status.
 ---
 
 # CCM Stack status

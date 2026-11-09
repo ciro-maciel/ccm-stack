@@ -1,6 +1,6 @@
 ---
 name: naming
-description: Name things the same way everywhere - code, files, routes and commits in English with fixed casing rules, people-facing text in the reader's language, stable ids in URLs - and rename without collisions. Use when naming variables, functions, files, routes, booleans, branches or commits, when translating identifiers, or before a bulk rename.
+description: Name code, files, routes and commits the same way everywhere, screens in the reader's language, and rename without collisions. Use when naming or renaming.
 ---
 
 # Names and language

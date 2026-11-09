@@ -1,6 +1,6 @@
 ---
 name: fix-with-proof
-description: Fix a defect with evidence - reproduce it on the real surface, trace it to where it started, change only what the evidence justifies, and show the same reproduction passing. Also for reporting any measured number. Use for any bug, regression, flaky behavior, "it doesn't work", "it's slow", or before claiming a speedup or a fix.
+description: Fix a defect with evidence: reproduce, find where it started, prove the fix with the same reproduction; explain any measured number. Use for any bug or slowness.
 ---
 
 # Fix with proof

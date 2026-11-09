@@ -1,6 +1,6 @@
 ---
 name: setup
-description: Configure CCM Stack for this person - their language, the spoken summary and its voice, their package manager, test e-mail and banned commands. Use for /ccm-stack:setup, "configure ccm", "change my language", "turn the voice on", or when the session says CCM Stack is not configured.
+description: Configure CCM Stack for this person: language, voice, package manager, test e-mail, banned commands, recommendations. Use for /ccm-stack:setup or changing any of them.
 ---
 
 # Set up CCM Stack

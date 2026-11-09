@@ -1,6 +1,6 @@
 ---
 name: mcp-design
-description: Design a product's MCP server as four tools - guide, read, write, delete - that call the same routes the product's own screens use, with destructive actions confirmed by the person and decisions never taken by the agent. Use when building or reviewing an MCP server for an app or API, or when an MCP grows one tool per endpoint.
+description: Design a product's MCP as four tools (guide, read, write, delete) over its own routes, destruction confirmed by the person. Use for any MCP server.
 ---
 
 # An MCP in four tools

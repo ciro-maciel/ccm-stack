@@ -1,6 +1,6 @@
 ---
 name: ux-rules
-description: Build screens that never make people wait on a slow job, never claim "nothing here" when a request failed, show one loader per navigation and skeletons after it, keep the chosen resource in the URL and lists loading as you scroll. Use when building or reviewing any screen, list, form, modal or loading state.
+description: Screens that never wait on slow jobs, never call a failure empty, use one loader then skeletons, keep the record in the URL. Use for any screen or list.
 ---
 
 # Screens that respect people

@@ -1,6 +1,6 @@
 ---
 name: correct
-description: Turn mistakes the person keeps correcting into checks that make them impossible - structure first, then a hook or lint whose message names the fix, then a test, and written rules last. Use for /ccm-stack:correct, "you did this again", "stop doing X", or when the same correction appears a second time.
+description: Turn a mistake the person corrected twice into a check that refuses it: structure, then hook or lint, then test, text last. Use for /ccm-stack:correct.
 ---
 
 # Turn corrections into checks

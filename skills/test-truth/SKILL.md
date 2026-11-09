@@ -1,6 +1,6 @@
 ---
 name: test-truth
-description: Write, review and trust only tests that fail when the behavior breaks - proved by sabotage, asserting what users observe, with a unique stamp for writes and one shared test account. Use when writing or changing tests, when a suite is green but a bug shipped, or when reviewing test code.
+description: Write and trust only tests that fail when the behavior breaks, proved by sabotage. Use when writing, changing or reviewing tests.
 ---
 
 # Tests that prove something

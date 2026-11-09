@@ -1,6 +1,6 @@
 ---
 name: ship
-description: Take a project from the person's machine to a live HTTPS address, watched by a monitor, with sign-in, data, payments or e-mail provisioned only when the project needs them - all on the free plans of Ciro Cesar Maciel's Infrastructure line, with one human step (an 8-character e-mail code). Use for "put this online", "deploy", "ship it", "publish the site", "I need a backend / database / payments / e-mail for this app".
+description: Put a project online with Ciro's Infrastructure line: one e-mail code, then a live HTTPS address, a monitor, and only the storage, payments or e-mail it needs. Use for deploy or backend needs.
 ---
 
 # Ship it

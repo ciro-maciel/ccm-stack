@@ -1,6 +1,6 @@
 ---
 name: webhooks
-description: Send and receive webhooks the standard way - Standard Webhooks signatures (HMAC-SHA256 over id.timestamp.body), replay protection, idempotent handlers, secret rotation, and the x-ccm header prefix used by CCM Stack projects. Use when adding outgoing webhooks to a product, writing a webhook receiver, or reviewing webhook security.
+description: Send and receive Standard Webhooks (x-ccm headers): signatures, replay protection, idempotency, rotation. Use for any webhook.
 ---
 
 # Webhooks the standard way

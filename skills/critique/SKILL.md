@@ -1,6 +1,6 @@
 ---
 name: critique
-description: Before showing any screen you changed, capture it in every state, theme and size, score it on five axes and fix whatever scores under 7. Use after any UI change, before a demo or review, or when asked to "check the design", "polish", or "is this ready to show".
+description: Before showing a changed screen, capture it in every state, theme and size, score five axes, fix anything under 7. Use after any UI change.
 ---
 
 # Review before you show

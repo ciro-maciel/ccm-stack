@@ -2,6 +2,12 @@
 
 All notable changes are listed here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and versions follow [Semantic Versioning](https://semver.org).
 
+## [1.4.1] - 2026-11-09
+
+### Changed
+
+- Lighter on context: the text every session starts with went from 3.4 KB to 1.8 KB, and the 19 skill descriptions from 6.5 KB to 2.8 KB, with the same rules.
+
 ## [1.4.0] - 2026-11-09
 
 ### Added

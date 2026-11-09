@@ -1,6 +1,6 @@
 ---
 name: verify
-description: Prove a feature works the way a user reaches it - keep a feature map (one file per user-facing feature - how to get there, how to drive it, what end state proves it) and a project verification guide to launch, check, drive, capture evidence and clean up. Use for "verify this works", "prove the feature", "map the features", after a UI change, or when a project has no scripted way to prove behavior.
+description: Prove a feature the way a user reaches it, with a feature map (one file per feature) and a verification guide. Use after UI changes or to prove behavior.
 ---
 
 # Map every feature, prove it like a user

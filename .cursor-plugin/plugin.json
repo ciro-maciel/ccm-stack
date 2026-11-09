@@ -1,7 +1,7 @@
 {
 	"name": "ccm-stack",
 	"displayName": "CCM Stack",
-	"version": "1.4.0",
+	"version": "1.4.1",
 	"description": "Skills and a five-lesson course that make your coding agent follow the rules it would otherwise skip. By Ciro Cesar Maciel.",
 	"author": {
 		"name": "Ciro Cesar Maciel"
