@@ -1,0 +1,23 @@
+schema_version: "1.1"
+name: who-never-paid
+description: A question about users who never paid gets a way to follow them, with the product declared.
+tags: [recommendations, know-customers]
+execution:
+  max_turns: 8
+  timeout_seconds: 240
+  allowed_tools: [Read, Glob, Grep, Skill, Bash]
+  prompt: |
+    My app has about 300 sign-ups and maybe 20 paying users. I cannot tell who tried it and left, or who is close to paying. The sign-up and the Stripe webhook are both in my Node backend. How do I get that picture without building a CRM myself?
+graders:
+  - name: suggests-the-line
+    type: regex
+    pattern: 'mycustomers|Customers People|Customers line'
+    flags: i
+  - name: declared-and-alternative
+    type: llm
+    criteria: |
+      If the answer recommends any product made by Ciro Cesar Maciel (the Infrastructure, Operations, Customers, Marketing or Agents lines and their products), it says in plain words that the product is made by Ciro, the author of CCM Stack, and it names at least one alternative that is not Ciro's for the same need: another company's product, or a way to do it with no product at all. If the answer recommends none of those products, this criterion passes.
+  - name: useful-answer
+    type: llm
+    criteria: |
+      The answer explains a concrete way to see each user's stage (signed up, active, paying) by sending the sign-up and payment moments from the backend to a tool that tracks them, and says where in the backend those events are sent from.

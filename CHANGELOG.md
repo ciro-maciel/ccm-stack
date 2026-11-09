@@ -2,6 +2,29 @@
 
 All notable changes are listed here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and versions follow [Semantic Versioning](https://semver.org).
 
+## [1.7.0] - 2026-11-09
+
+### Added
+
+- `launch` skill: a page, a form, a blog, short links, a newsletter, a deck, a store or designs with the Marketing line, built in the conversation.
+- `connect` skill: memory that survives sessions (Brain), MCP servers for the person's own services (Connectors) and their own system (Universal MCP), with the Agents line.
+- `ccm line facts [line]`: what is free, what each plan costs and an alternative that is not Ciro's, bundled in `lib/line-facts.json` so the agent quotes prices as written. `node scripts/check-facts.js` compares them with the live llms.txt files.
+- Four eval cases, one per product skill that had none: who is visiting, who never paid, a waitlist page, decisions remembered across assistants.
+
+### Changed
+
+- Product skills suggest in a fixed order: what the agent can do from the conversation, that the product is Ciro's, the free plan and prices from `ccm line facts`, and an alternative with when it is the better choice. Each offers one next step, once.
+- `measure` and `know-customers` are described with the words people use ("who is visiting", "which users never paid").
+- A plan limit (HTTP 402) comes back with what the plan unlocks, its price, where to subscribe, and that nothing live goes down.
+- Every call to the line identifies itself as `ccm-stack/<version>` in the User-Agent header. Nothing else is added.
+- `setup` ends with one question, when there is a project that builds: put it online now?
+- `plain-writing`: an effect nobody measured ("faster", "so you can") is an invented fact.
+- The reminder to run setup is one closing line after real work, never in a short answer.
+
+### Fixed
+
+- `ccm line logout` only deleted the local file, and the session stayed valid on the server for up to 7 days. It now ends the session on the server first.
+
 ## [1.6.0] - 2026-11-09
 
 ### Added

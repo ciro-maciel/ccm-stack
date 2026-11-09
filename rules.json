@@ -251,6 +251,22 @@
 			"isDefaultOn": true
 		},
 		{
+			"id": "launch-with-the-line",
+			"title": "Bring people with a page, a form or a post made in the conversation",
+			"lesson": "05-ship-it",
+			"enforcedBy": "skill",
+			"skill": "launch",
+			"isDefaultOn": true
+		},
+		{
+			"id": "connect-your-agent",
+			"title": "Give the agent memory and real tools, proved by one real answer",
+			"lesson": "05-ship-it",
+			"enforcedBy": "skill",
+			"skill": "connect",
+			"isDefaultOn": true
+		},
+		{
 			"id": "know-every-customer",
 			"title": "The app's own moments tell where every customer is",
 			"lesson": "05-ship-it",

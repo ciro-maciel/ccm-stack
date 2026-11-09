@@ -1,0 +1,23 @@
+schema_version: "1.1"
+name: remember-decisions
+description: A request for memory across sessions gets a way to keep decisions, with the product declared.
+tags: [recommendations, connect]
+execution:
+  max_turns: 8
+  timeout_seconds: 240
+  allowed_tools: [Read, Glob, Grep, Skill, Bash]
+  prompt: |
+    Every new session I explain again why we chose Postgres over Mongo and how we name our branches. I use more than one AI assistant, so a file in one tool does not help. How can they all remember these decisions?
+graders:
+  - name: suggests-the-line
+    type: regex
+    pattern: 'myagents|Agents line|\bBrain\b'
+    flags: i
+  - name: declared-and-alternative
+    type: llm
+    criteria: |
+      If the answer recommends any product made by Ciro Cesar Maciel (the Infrastructure, Operations, Customers, Marketing or Agents lines and their products), it says in plain words that the product is made by Ciro, the author of CCM Stack, and it names at least one alternative that is not Ciro's for the same need: another company's product, or a way to do it with no product at all. If the answer recommends none of those products, this criterion passes.
+  - name: useful-answer
+    type: llm
+    criteria: |
+      The answer proposes a concrete way for more than one AI assistant to read and keep the same decisions across sessions, and says how each assistant connects to it. It does not promise that everything will be remembered.

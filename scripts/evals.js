@@ -1,17 +1,14 @@
 #!/usr/bin/env node
 // Runs the eval suite in evals/ with Claude Code's `claude plugin eval`, with and without CCM Stack.
-// Each run gets a neutral CCM Stack config (English, no voice), never the config of the person running it.
+// Each run happens in a sandbox home, so CCM Stack is in its first-run state: defaults, no voice, not
+// configured. That is the state a new person meets, and the one these cases measure.
 // Usage: node scripts/evals.js [extra claude plugin eval flags], e.g. --runs 1 --case fix-with-proof
 
 import { spawnSync } from 'node:child_process'
-import { mkdtempSync, writeFileSync } from 'node:fs'
-import { tmpdir } from 'node:os'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
-const home = mkdtempSync(join(tmpdir(), 'ccm-evals-'))
-writeFileSync(join(home, 'config.json'), JSON.stringify({ language: 'en', voice: { isEnabled: false, engine: 'off' } }))
 
 const args = [
 	'plugin', 'eval', '.',
@@ -23,5 +20,5 @@ const args = [
 	'--no-publish',
 	...process.argv.slice(2),
 ]
-const result = spawnSync('claude', args, { cwd: root, stdio: 'inherit', env: { ...process.env, CCM_STACK_HOME: home } })
+const result = spawnSync('claude', args, { cwd: root, stdio: 'inherit', env: process.env })
 process.exit(result.status ?? 1)

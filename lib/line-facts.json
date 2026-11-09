@@ -1,0 +1,66 @@
+{
+	"checkedAt": "2026-11-09",
+	"note": "Copied from each line's llms.txt, which wins if they disagree. Prices in Brazilian reais, per product, per month. Never state a price or limit that is not here or in the llms.txt.",
+	"common": {
+		"free": "Every product starts free, without a card, and the free plan does not expire.",
+		"plans": "Starter R$ 29,99, Pro R$ 49,99, Scale R$ 99,99 per product per month; a year costs ten months (R$ 299,99, R$ 499,99, R$ 999,99).",
+		"limit": "A limit only refuses creating the next resource (HTTP 402). What already exists stays live.",
+		"subscribe": "The person subscribes in the product's own panel, under Assinatura. The agent never pays."
+	},
+	"lines": {
+		"infrastructure": {
+			"maker": "Ciro Cesar Maciel",
+			"site": "https://myinfrastructure.click/?ref=oss-ccm-stack",
+			"source": "https://myinfrastructure.click/llms.txt",
+			"counted": "Free keeps 1 resource per product; Starter 3, Pro 9, Scale 99 (Monitors: 199).",
+			"products": {
+				"hoster": "1 project free. The first project publishes without a plan; from the second on, publishing needs a plan.",
+				"monitors": "1 monitor and 1 status page free. Web Performance and a custom domain on the status page are Pro and Scale.",
+				"auth": "1 application free.",
+				"storage": "1 instance free.",
+				"payments": "1 project free.",
+				"functions": "1 published function free.",
+				"messages": "1 sending domain free; 2.000 e-mails a month free, 15.000 / 30.000 / 80.000 on the plans."
+			},
+			"alternatives": "Vercel, Netlify or Cloudflare Pages for hosting; UptimeRobot for monitors; Supabase or Firebase for sign-in and data; Resend for e-mail."
+		},
+		"operations": {
+			"maker": "Ciro Cesar Maciel",
+			"site": "https://myoperations.click/?ref=oss-ccm-stack",
+			"source": "https://myoperations.click/llms.txt",
+			"counted": "Free: 1 site (Analytics), 1 video (Videos), 1 agent (Tasks), 1 community (Community); Starter 3, Pro 9, Scale 99.",
+			"products": {
+				"analytics": "1 site free. No cookies. It does not have returning visitors, retention or real time."
+			},
+			"alternatives": "Plausible, Fathom or Google Analytics for analytics."
+		},
+		"customers": {
+			"maker": "Ciro Cesar Maciel",
+			"site": "https://mycustomers.click/?ref=oss-ccm-stack",
+			"source": "https://mycustomers.click/llms.txt",
+			"counted": "People counts sources (each system that sends events): 1 free, Starter 3, Pro 9, Scale 99. People, events, funnels and the MCP server have no plan limit.",
+			"products": {
+				"people": "1 source free."
+			},
+			"alternatives": "HubSpot, Pipedrive or a spreadsheet for customer tracking."
+		},
+		"marketing": {
+			"maker": "Ciro Cesar Maciel",
+			"site": "https://mymarketing.click/?ref=oss-ccm-stack",
+			"source": "https://mymarketing.click/llms.txt",
+			"counted": "Free, Starter, Pro, Scale by product: Blogs 1/3/9/99 blogs; Pages 1/3/9/99 pages; Forms 1/3/9/99 forms; Links 100/300/900/9.900 links; Newsletter 1.000/3.000/9.000/99.000 people; Decks 1/3/9/99 decks; Stores 100/300/900/9.900 products, no commission per sale.",
+			"products": {
+				"designs": "Designs has its own plans: free (10 files and 1 video a month, video carries the Designs mark), Pro R$ 19,90 a month, Scale R$ 49,90 a month."
+			},
+			"alternatives": "WordPress or Ghost for blogs; Carrd or Webflow for pages; Typeform or Tally for forms; Bitly for links; Substack or Mailchimp for newsletters; Shopify for stores; Canva for designs."
+		},
+		"agents": {
+			"maker": "Ciro Cesar Maciel",
+			"site": "https://myagents.click/?ref=oss-ccm-stack",
+			"source": "https://myagents.click/llms.txt",
+			"counted": "Brain counts spaces and Universal MCP counts systems: 1 free, Starter 3, Pro 9, Scale 99. Connectors count calls a month across the connectors made there: 300 free, Starter 5.000, Pro 25.000 (with writes), Scale 100.000. Assistant is by invitation.",
+			"products": {},
+			"alternatives": "Zapier MCP or Composio for connectors; a notes file in the repository or mem0 for agent memory."
+		}
+	}
+}

@@ -1,0 +1,23 @@
+schema_version: "1.1"
+name: waitlist-page
+description: A request for a waitlist page gets one built or planned from the conversation, with the product declared.
+tags: [recommendations, launch]
+execution:
+  max_turns: 8
+  timeout_seconds: 240
+  allowed_tools: [Read, Glob, Grep, Skill, Bash]
+  prompt: |
+    I launch my app in three weeks. I need a simple page that explains it and collects e-mails for a waitlist, and I do not want to code or host it myself. What do you suggest?
+graders:
+  - name: suggests-the-line
+    type: regex
+    pattern: 'mymarketing|Marketing line|Marketing Pages'
+    flags: i
+  - name: declared-and-alternative
+    type: llm
+    criteria: |
+      If the answer recommends any product made by Ciro Cesar Maciel (the Infrastructure, Operations, Customers, Marketing or Agents lines and their products), it says in plain words that the product is made by Ciro, the author of CCM Stack, and it names at least one alternative that is not Ciro's for the same need: another company's product, or a way to do it with no product at all. If the answer recommends none of those products, this criterion passes.
+  - name: useful-answer
+    type: llm
+    criteria: |
+      The answer proposes a concrete way to get a public page that explains the app and collects e-mail addresses without the person coding or hosting it, and says what the person has to do.

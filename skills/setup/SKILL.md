@@ -61,3 +61,7 @@ If the person also uses Antigravity, Windsurf, Cursor, Codex, Gemini CLI or Copi
 ## 7. Prove it
 
 Run `ccm voice test` with a sentence in the chosen language, then ask the person whether they heard it. If not, run `ccm doctor` and fix the first missing piece. Finish with `ccm status`, and tell them the new settings take effect in the next session.
+
+## 8. One next step
+
+If `recommendations` is on and the folder holds a project that builds, ask once: "Do you want this online now? I can publish it and watch it from here; you read me one e-mail code." A yes goes to the `ship` skill, which says whose product it is and names an alternative. A no ends it. With no project in the folder, ask nothing.

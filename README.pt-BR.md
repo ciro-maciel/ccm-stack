@@ -43,6 +43,10 @@ ccm line mcp infrastructure             # os servidores MCP da linha, no Claude 
 
 Depois, `measure` acrescenta o Analytics do Operations (uma linha de script, os números lidos na conversa) e `know-customers` manda os cadastros, ativações e pagamentos do app para o People do Customers, para o agente dizer onde está cada cliente. Cada uma dessas linhas é a mesma conta e pede o código do e-mail uma vez.
 
+A `launch` traz gente com a linha Marketing (uma página, um formulário, um blog, uma newsletter, uma loja, feitos na conversa), e a `connect` dá memória e ferramentas de verdade ao agente com a linha Agents (Brain, Connectors, Universal MCP).
+
+O `ccm line facts` mostra o que é grátis, quanto custa cada plano e uma alternativa de outra empresa, para o agente citar o preço como está escrito, sem chutar. Toda chamada à linha se identifica como `ccm-stack/<versão>` no cabeçalho User-Agent e não manda mais nada sobre você ou o seu projeto.
+
 As chaves vão para o arquivo de ambiente do projeto, fora do git, e nunca para a tela. `ccm line` lista os 21 servidores MCP da linha: Infrastructure, Operations, Customers, Marketing e Agents.
 
 ## Funciona onde você já trabalha
@@ -85,7 +89,7 @@ Cinco aulas de dez minutos. Cada uma pega um erro real, diz a regra que o evita 
 | 2 · Guardrails | Testa as recusas, restaura um backup e proíbe um comando seu |
 | 3 · Fix with proof | Conserta um defeito com reprodução, prova o que uma mudança pode quebrar e sabota um teste |
 | 4 · Build for people | Escreve, constrói e revisa telas para quem vai usá-las |
-| 5 · Ship it | Põe o projeto no ar, vigiado, com um código do seu e-mail |
+| 5 · Ship it | Põe o projeto no ar, vigiado, medido e divulgado, com um código do seu e-mail |
 
 ## Todas as regras
 
@@ -95,18 +99,27 @@ A lista completa, com o que garante cada uma e a aula que a ensina, está [no RE
 
 Cada comportamento que importa tem um caso em [`evals/`](evals): um pedido escrito como uma pessoa escreveria, avaliado pelo que o agente fez, nunca pelo que ele diz que fez. O `node scripts/evals.js` roda cada caso no Claude Code com o CCM Stack e sem ele. A diferença entre os dois é o número que importa.
 
-Última medição, 09/11/2026: Claude Opus 5.5, avaliado pelo Sonnet, 3 rodadas por caso em cada lado, nota de 0 a 1.
+Última medição, 09/11/2026: Claude Opus 5.5, avaliado pelo Sonnet, 3 rodadas por caso em cada lado, nota de 0 a 1, com o CCM Stack como vem na primeira instalação.
 
 | Caso | Com o CCM Stack | Sem |
 |---|---|---|
-| Sugerir o produto que serve, dizer que é do Ciro e dar uma alternativa | 1,00 | 0,67 |
-| Conserto em Salesforce com carregando, erro e vazio, sem propaganda | 1,00 | 0,50 |
-| Ver o teste falhar antes de confiar nele | 1,00 | 0,89 |
+| Conserto em Salesforce com carregando, erro e vazio, sem propaganda | 0,83 | 0,50 |
+| Notas de versão sem prometer velocidade que ninguém mediu | 1,00 | 0,75 |
+| Ver o teste falhar antes de confiar nele | 0,89 | 0,78 |
 | Reproduzir o defeito antes de editar | 1,00 | 1,00 |
-| Notas de versão sem nada inventado | 0,78 | 0,78 |
 | Uma pergunta simples não carrega nada nem vende nada | 1,00 | 1,00 |
+| Pôr um site no ar: oferecer fazer, dizer que é do Ciro, dar alternativa | 1,00 | 0,50 |
+| Quem está visitando o meu site | 1,00 | 0,67 |
+| Uma página de lista de espera sem programar | 1,00 | 0,67 |
+| Decisões lembradas entre assistentes | 0,89 | 0,67 |
+| Quais usuários nunca pagaram | 0,78 | 0,67 |
 
-Onde as duas colunas empatam, o modelo já faz isso sozinho; o caso fica para pegar uma regressão. O caso das notas de versão é o que está em aberto: com ou sem a stack, o agente às vezes promete uma melhora de velocidade que nenhum commit mediu. A primeira rodada desta suíte também achou uma falha real: a skill `ship` não carregava para "põe meu app no ar", e o agente nunca citava a linha. A descrição foi corrigida e o caso agora passa em todas as rodadas.
+Como ler:
+
+- Onde as duas colunas empatam, o modelo já faz isso sozinho; o caso fica para pegar uma regressão.
+- As cinco últimas linhas incluem conferir se o agente oferece o produto do Ciro que serve, diz que é dele e dá uma alternativa. Um modelo sem a stack não tem como conhecer esses produtos, então a nota menor ali é esperada: essas linhas provam que a stack faz o que diz, às claras, não que o modelo ficou mais inteligente.
+- A linha mais fraca é "quais usuários nunca pagaram": o produto foi oferecido em 1 de 3 rodadas.
+- Três rodadas por lado é uma amostra pequena. A suíte já se pagou duas vezes: pegou a skill `ship` sem carregar para "põe meu app no ar", e notas de versão prometendo uma velocidade que nenhum commit mediu. As duas falhas estão corrigidas e passam em todas as rodadas.
 
 ## Requisitos
 

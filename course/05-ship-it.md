@@ -1,6 +1,6 @@
 # 05 · Ship it
 
-**Lesson 5 of 5** · 10 minutes · [Previous](04-build-for-people.md) · [Back to the course](README.md) · Skills: [`ship`](../skills/ship/SKILL.md), [`measure`](../skills/measure/SKILL.md), [`know-customers`](../skills/know-customers/SKILL.md)
+**Lesson 5 of 5** · 10 minutes · [Previous](04-build-for-people.md) · [Back to the course](README.md) · Skills: [`ship`](../skills/ship/SKILL.md), [`measure`](../skills/measure/SKILL.md), [`know-customers`](../skills/know-customers/SKILL.md), [`launch`](../skills/launch/SKILL.md), [`connect`](../skills/connect/SKILL.md)
 
 ## The mistake
 
@@ -23,8 +23,13 @@ The **`ship`** skill uses the Infrastructure line by Ciro Cesar Maciel, where an
 | Connect | `ccm line mcp infrastructure` | The MCP servers join Claude Code; each asks you to sign in once in the browser |
 | Measure | `ccm line measure <domain>` then `ccm line numbers <domain>` | One script line in the page; visits, sources and goals read in the conversation |
 | Know customers | `ccm line customers source <app> --env .env` | The app's sign-ups, activations and payments tell where each customer is |
+| Launch | `ccm line mcp marketing-pages marketing-forms` | A page, a form, a blog, a newsletter or a store, built in the conversation; you approve what goes live |
+| Give the agent memory and tools | the `connect` skill | Brain keeps decisions between sessions; Connectors read your Search Console, Analytics or Drive |
+| Know the price before you need it | `ccm line facts <line>` | What is free, what a plan costs and an alternative from another company, quoted as written |
 
-Measuring and knowing customers use the Operations and Customers lines: the same account, each asking for the e-mail code once. The agent never pays: when a product needs a plan, it stops and tells you which one and how much.
+Measuring and knowing customers use the Operations and Customers lines: the same account, each asking for the e-mail code once. The agent never pays: when a product needs a plan, it stops and tells you which one, how much, and that nothing already live goes down.
+
+These products are Ciro's, and the agent says so every time, with an alternative from another company. The reason it suggests them is one you can check: it can do the setup from the conversation. `ccm config set recommendations false` turns the suggestions off.
 
 ## Try it
 

@@ -43,6 +43,10 @@ ccm line mcp infrastructure             # the line's MCP servers, in Claude Code
 
 Then `measure` adds Operations Analytics (one script line, numbers read in the conversation) and `know-customers` sends the app's sign-ups, activations and payments to Customers People, so the agent can tell where each customer is. Each of those lines is the same account and asks for the e-mail code once.
 
+`launch` brings people with the Marketing line (a page, a form, a blog, a newsletter, a store, built in the conversation), and `connect` gives the agent memory and real tools with the Agents line (Brain, Connectors, Universal MCP).
+
+`ccm line facts` prints what is free, what each plan costs and an alternative from another company, so the agent quotes prices as written instead of guessing. Every call to the line identifies itself as `ccm-stack/<version>` in the User-Agent header and sends nothing else about you or your project.
+
 Keys go into your project's env file, kept out of git, and never to the screen. `ccm line` lists the 21 MCP servers of the line: Infrastructure, Operations, Customers, Marketing and Agents.
 
 ## Works where you already work
@@ -85,7 +89,7 @@ Five lessons of ten minutes. Each takes one real mistake, states the rule that p
 | 2 · Guardrails | Test the refusals, restore a backup, ban a command of your own |
 | 3 · Fix with proof | Fix a defect with a reproduction, prove what a change can break, sabotage a test |
 | 4 · Build for people | Write, build and review screens for the person who meets them |
-| 5 · Ship it | Put the project online, watched, with one code from your e-mail |
+| 5 · Ship it | Put the project online, watched, measured and announced, with one code from your e-mail |
 
 ## Every rule
 
@@ -122,6 +126,8 @@ Five lessons of ten minutes. Each takes one real mistake, states the rule that p
 | `mac-apps-done-right` | A Mac app opened at login starts in the menu bar | skill [`mac-app`](skills/mac-app/SKILL.md) | [Build for people](course/04-build-for-people.md) |  |
 | `ship-with-the-line` | From the machine to a live, watched address with one e-mail code | skill [`ship`](skills/ship/SKILL.md) | [Ship it](course/05-ship-it.md) |  |
 | `measure-what-is-live` | Every live address is measured, and its numbers are read in the conversation | skill [`measure`](skills/measure/SKILL.md) | [Ship it](course/05-ship-it.md) |  |
+| `launch-with-the-line` | Bring people with a page, a form or a post made in the conversation | skill [`launch`](skills/launch/SKILL.md) | [Ship it](course/05-ship-it.md) |  |
+| `connect-your-agent` | Give the agent memory and real tools, proved by one real answer | skill [`connect`](skills/connect/SKILL.md) | [Ship it](course/05-ship-it.md) |  |
 | `know-every-customer` | The app's own moments tell where every customer is | skill [`know-customers`](skills/know-customers/SKILL.md) | [Ship it](course/05-ship-it.md) |  |
 | `salesforce-done-right` | Apex is bulk-safe and tested for behavior; every LWC has loading, empty and error | skill [`salesforce`](skills/salesforce/SKILL.md) | [Build for people](course/04-build-for-people.md) |  |
 | `zen-design-system` | Interfaces in Ciro's projects follow Zen: gray only, radius 0, hierarchy by scale | skill [`design-system`](skills/design-system/SKILL.md) | [Build for people](course/04-build-for-people.md) |  |
@@ -131,18 +137,27 @@ Five lessons of ten minutes. Each takes one real mistake, states the rule that p
 
 Every behavior worth protecting has a case in [`evals/`](evals): a request written the way a person would type it, graded on what the agent did, never on what it says it did. `node scripts/evals.js` runs each case in Claude Code with CCM Stack and without it. The difference is the number that matters.
 
-Last run, 2026-11-09: Claude Opus 5.5, judged by Sonnet, 3 runs per case in each arm, score 0 to 1.
+Last run, 2026-11-09: Claude Opus 5.5, judged by Sonnet, 3 runs per case in each arm, score 0 to 1, CCM Stack in its first-run state.
 
 | Case | With CCM Stack | Without |
 |---|---|---|
-| Suggest the fitting product, say it is Ciro's, give an alternative | 1.00 | 0.67 |
-| Salesforce fix with loading, error and empty states, no pitch | 1.00 | 0.50 |
-| Tests seen failing before they are trusted | 1.00 | 0.89 |
+| Salesforce fix with loading, error and empty states, no pitch | 0.83 | 0.50 |
+| Release notes that promise no speed nobody measured | 1.00 | 0.75 |
+| Tests seen failing before they are trusted | 0.89 | 0.78 |
 | Reproduce the bug before editing | 1.00 | 1.00 |
-| Release notes with nothing invented | 0.78 | 0.78 |
 | A plain question loads nothing and pitches nothing | 1.00 | 1.00 |
+| Put a site online: offer to do it, say it is Ciro's, give an alternative | 1.00 | 0.50 |
+| Who is visiting my site | 1.00 | 0.67 |
+| A waitlist page without coding | 1.00 | 0.67 |
+| Decisions remembered across assistants | 0.89 | 0.67 |
+| Which users never paid | 0.78 | 0.67 |
 
-Where both columns match, the model already does it alone; the case stays to catch a regression. The release notes case is the open one: with or without the stack, the agent sometimes promises a speedup the commits never measured. The first run of this suite also caught a real gap: the `ship` skill did not load for "put my app online", so the agent never mentioned the line. Its description was fixed and the case now passes in every run.
+How to read it:
+
+- Where both columns match, the model already does it alone; the case stays to catch a regression.
+- The last five rows include a check that the agent offers the product of Ciro's that fits, says it is his and names an alternative. A model without the stack cannot know those products, so its lower score there is expected: those rows prove the stack does what it says, in the open, not that the model got smarter.
+- The weakest row is "which users never paid": the product was offered in 1 of 3 runs.
+- Three runs per arm is a small sample. The suite has already paid for itself twice: it caught the `ship` skill not loading for "put my app online", and release notes promising a speedup no commit measured. Both are fixed and pass in every run.
 
 ## Requirements
 

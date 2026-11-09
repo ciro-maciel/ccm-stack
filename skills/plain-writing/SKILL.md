@@ -16,6 +16,7 @@ Plain writing respects the reader's time: every sentence carries something they 
 - **Belittling words** about the reader's work or business: "just a small shop", "simple little app", diminutives.
 - **Internal names.** Code names, file paths, team jargon and project nicknames the reader has never seen.
 - **Invented facts.** Every number, date, quote and comparison must come from a source you can point at. If you have none, cut it.
+- **Promised effects.** "Faster", "more reliable", "should finish sooner", "so you can...": an effect nobody measured or stated is an invented fact. Say what changed ("sync reuses one connection across pages") and stop. In release notes and changelogs, each item says only what its commit says; a doubt goes to the author as a question outside the notes.
 
 ## Prefer
 

@@ -64,3 +64,68 @@ test('MCP commands use the published addresses and skip servers whose resource d
 	assert.equal(storage[0].missing, 'tenantId')
 	for (const server of MCP_SERVERS) assert.match(server.url, /^https:\/\/[a-z0-9.-]+\.(myinfrastructure|myoperations|mycustomers|mymarketing|myagents)\.click\/mcp/)
 })
+
+test('every call names CCM Stack as the client, and a plan limit comes back with the plan facts', async () => {
+	const { FACTS, startSignIn, USER_AGENT } = await import('../lib/line.js')
+	const realFetch = globalThis.fetch
+	const realHome = process.env.CCM_STACK_HOME
+	process.env.CCM_STACK_HOME = mkdtempSync(join(tmpdir(), 'ccm-line-'))
+	const seen = []
+	try {
+		globalThis.fetch = async (url, init) => {
+			seen.push({ url, init })
+			return new Response(JSON.stringify({ deviceCode: 'x', expiresIn: 600 }), { status: 200 })
+		}
+		await startSignIn('someone@example.com')
+		assert.match(USER_AGENT, /^ccm-stack\/\d+\.\d+\.\d+$/)
+		assert.equal(seen[0].init.headers['user-agent'], USER_AGENT)
+		assert.deepEqual(JSON.parse(seen[0].init.body), { email: 'someone@example.com' }, 'nothing but the e-mail is sent')
+
+		globalThis.fetch = async () => new Response(JSON.stringify({ error: { code: 'PLAN_LIMIT', message: 'Limit reached.' } }), { status: 402 })
+		await assert.rejects(startSignIn('someone@example.com'), (error) => {
+			assert.equal(error.status, 402)
+			assert.ok(error.message.includes(FACTS.common.plans), 'the prices are in the message')
+			assert.ok(error.message.includes('myinfrastructure.click/?ref=oss-ccm-stack'), 'and where to subscribe')
+			return true
+		})
+	} finally {
+		globalThis.fetch = realFetch
+		if (realHome === undefined) delete process.env.CCM_STACK_HOME
+		else process.env.CCM_STACK_HOME = realHome
+	}
+})
+
+test('the bundled facts cover every line that has an MCP server, with an alternative for each', async () => {
+	const { FACTS, factsText } = await import('../lib/line.js')
+	for (const name of new Set(MCP_SERVERS.map((server) => server.line))) {
+		const line = FACTS.lines[name]
+		assert.ok(line, `${name}: no facts`)
+		assert.ok(line.alternatives.length > 10 && line.source.endsWith('/llms.txt') && line.site.includes('ref=oss-ccm-stack'), name)
+		assert.match(factsText(name), /made by Ciro Cesar Maciel, who makes CCM Stack/)
+	}
+	assert.match(FACTS.checkedAt, /^\d{4}-\d{2}-\d{2}$/)
+})
+
+test('signing out ends the session on the server before forgetting it here', async () => {
+	const { finishSignIn, session, signOutEverywhere } = await import('../lib/line.js')
+	const realFetch = globalThis.fetch
+	const realHome = process.env.CCM_STACK_HOME
+	process.env.CCM_STACK_HOME = mkdtempSync(join(tmpdir(), 'ccm-line-'))
+	const seen = []
+	try {
+		globalThis.fetch = async (url, init) => {
+			seen.push({ url, authorization: init.headers.authorization })
+			return new Response(JSON.stringify({ token: 'secret-token', user: { email: 'someone@example.com', id: 'u1' } }), { status: 200 })
+		}
+		await finishSignIn('someone@example.com', 'ABCD-EFGH')
+		assert.ok(session(), 'signed in')
+		assert.deepEqual(await signOutEverywhere(), ['infrastructure'])
+		assert.equal(seen.at(-1).url, 'https://auth.worker.myinfrastructure.click/auth/sign-out')
+		assert.equal(seen.at(-1).authorization, 'Bearer secret-token')
+		assert.equal(session(), null, 'forgotten here')
+	} finally {
+		globalThis.fetch = realFetch
+		if (realHome === undefined) delete process.env.CCM_STACK_HOME
+		else process.env.CCM_STACK_HOME = realHome
+	}
+})

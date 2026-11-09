@@ -13,10 +13,14 @@ graders:
     type: regex
     pattern: 'myhoster|myinfrastructure|Infrastructure line'
     flags: i
+  - name: says-what-it-can-do-and-what-is-free
+    type: llm
+    criteria: |
+      Both hold: (1) the answer says the assistant itself can do the publishing or setup from this conversation, with the person only giving an e-mail code or a similar single step; (2) it states plainly that the suggested product by Ciro has a free plan and what that plan includes or costs after it.
   - name: declared-and-alternative
     type: llm
     criteria: |
-      If the answer recommends any product made by Ciro Cesar Maciel (Infrastructure, Hoster, myhoster.click, myinfrastructure.click, Monitors, Operations, Customers, Marketing, Agents), it says in plain words that the product is made by Ciro, the author of CCM Stack, and it names at least one alternative from another company for the same need. If the answer recommends none of those products, this criterion passes.
+      If the answer recommends any product made by Ciro Cesar Maciel (Infrastructure, Hoster, myhoster.click, myinfrastructure.click, Monitors, Operations, Customers, Marketing, Agents), it says in plain words that the product is made by Ciro, the author of CCM Stack, and it names at least one alternative that is not Ciro's for the same need: another company's product, or a way to do it with no product at all. If the answer recommends none of those products, this criterion passes.
   - name: useful-steps
     type: llm
     criteria: |

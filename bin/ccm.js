@@ -30,6 +30,7 @@ const HELP = `ccm: your CCM Stack
   ccm check pre-commit | commit-msg <file>  what the git hooks run
 
   ccm line                                  sign-in state and every MCP server of the line
+  ccm line facts [line]                     free plan, prices and alternatives, to quote as they are
   ccm line login <email> [code] [--line <line>]
                                             sign in: sends the 8-character code, then exchanges it;
                                             --line operations or customers (default infrastructure)
@@ -116,6 +117,7 @@ async function line([action, ...rest]) {
 		}
 		return
 	}
+	if (action === 'facts') return print(line.factsText(rest[0]))
 	if (action === 'login') {
 		const positional = rest.filter((word, index) => !word.startsWith('--') && !rest[index - 1]?.startsWith('--'))
 		const [email, code] = positional
@@ -130,8 +132,8 @@ async function line([action, ...rest]) {
 		return print(`signed in to ${lineName} as ${signed.email} until ${signed.expiresAt.slice(0, 10)}`)
 	}
 	if (action === 'logout') {
-		for (const name of line.SIGN_IN_LINES) rmSync(line.sessionFile(name), { force: true })
-		return print('signed out of every line on this machine')
+		const ended = await line.signOutEverywhere()
+		return print(ended.length ? `signed out of ${ended.join(', ')}: the session is ended on the server and forgotten on this machine` : 'no line was signed in on this machine')
 	}
 	if (action === 'measure') {
 		const [domain] = rest

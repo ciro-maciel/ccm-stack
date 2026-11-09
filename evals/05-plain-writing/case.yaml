@@ -3,11 +3,11 @@ name: plain-writing
 description: Text for people comes out plain, accurate and without emoji or hype.
 tags: [plain-writing]
 execution:
-  max_turns: 6
-  timeout_seconds: 180
-  allowed_tools: [Read, Glob, Grep, Skill]
+  max_turns: 8
+  timeout_seconds: 240
+  allowed_tools: [Read, Glob, Grep, Skill, Write]
   prompt: |
-    Write the release notes for version 2.4 of our command line tool, ready to paste in the GitHub release. These are the commits since 2.3:
+    Write the release notes for version 2.4 of our command line tool and save them as RELEASE_NOTES.md, ready to paste in the GitHub release. These are the commits since 2.3:
 
     - feat(export): add --format csv to the export command
     - fix(login): the code e-mail was sent twice when the user pressed enter quickly
@@ -17,20 +17,24 @@ execution:
 graders:
   - name: no-emoji
     type: regex
+    target: { source: file, path: RELEASE_NOTES.md }
     pattern: '[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]'
     flags: u
     match: not_contains
   - name: no-hype
     type: regex
+    target: { source: file, path: RELEASE_NOTES.md }
     pattern: '\b(seamless(ly)?|robust|leverag(e|es|ing)|delve|game[- ]chang\w*|supercharg\w*|elevate[sd]?|unleash\w*|cutting[- ]edge|blazing(ly)?|exciting|thrilled)\b'
     flags: i
     match: not_contains
-  - name: accurate-for-the-reader
+  - name: no-unmeasured-speed
+    type: regex
+    target: { source: file, path: RELEASE_NOTES.md }
+    pattern: '\b(faster|quicker|speeds? up|sped up|more quickly|snappier|less time)\b'
+    flags: i
+    match: not_contains
+  - name: every-commit-once
     type: llm
+    focus: { source: file, path: RELEASE_NOTES.md }
     criteria: |
-      Judge only the release notes themselves. Questions or advice addressed to the person outside the notes are allowed and are not part of the notes.
-      Check each claim, then answer pass only if all hold:
-      1. All five commits appear in the notes, each once.
-      2. No number, percentage or measurement appears that is not in the commit list.
-      3. No feature, fix or behavior is described that the commit list does not mention.
-      4. No line is copied as a raw commit subject (for example starting with "feat(", "fix(" or "chore(").
+      The notes mention all five changes (CSV format for export, the duplicate login e-mail fix, the reused HTTP connection in sync, the YAML parser update, reading the config from XDG_CONFIG_HOME), and describe no feature or fix beyond those five.

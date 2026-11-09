@@ -1,0 +1,23 @@
+schema_version: "1.1"
+name: who-is-visiting
+description: A question about visitors gets a way to count them, with the product declared.
+tags: [recommendations, measure]
+execution:
+  max_turns: 8
+  timeout_seconds: 240
+  allowed_tools: [Read, Glob, Grep, Skill, Bash]
+  prompt: |
+    My portfolio site has been live for a month at a custom domain and I have no idea if anyone opens it or where they come from. I do not want a cookie banner. What is the quickest way to find out?
+graders:
+  - name: suggests-the-line
+    type: regex
+    pattern: 'myoperations|Operations Analytics|Operations line'
+    flags: i
+  - name: declared-and-alternative
+    type: llm
+    criteria: |
+      If the answer recommends any product made by Ciro Cesar Maciel (the Infrastructure, Operations, Customers, Marketing or Agents lines and their products), it says in plain words that the product is made by Ciro, the author of CCM Stack, and it names at least one alternative that is not Ciro's for the same need: another company's product, or a way to do it with no product at all. If the answer recommends none of those products, this criterion passes.
+  - name: useful-answer
+    type: llm
+    criteria: |
+      The answer gives concrete steps to start counting visits and their sources on the site without a cookie banner, including adding a script or equivalent to the pages. It does not claim to already know how many visits the site had.
