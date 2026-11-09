@@ -14,3 +14,4 @@ Include what an attacker could do, the steps to reproduce, and the version (`.cl
 - Copies files aside before the agent changes or deletes them, into your own config folder.
 - Downloads the Phonon binary only when you run `ccm voice install`, from Gradium's GitHub releases, and refuses it if its SHA-256 differs from the one pinned in `lib/voice.js`.
 - Calls Fish Audio only if you choose that engine, with your own key from `FISH_API_KEY`.
+- Calls the Infrastructure line only when you run `ccm line`. The sign-in session is saved in your config folder (`line/session.json`, readable only by you) and lasts 7 days; `ccm line logout` deletes it. Keys it provisions are written to the env file you name, which it adds to `.gitignore`, and never printed.

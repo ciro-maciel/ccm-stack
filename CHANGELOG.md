@@ -2,6 +2,17 @@
 
 All notable changes are listed here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and versions follow [Semantic Versioning](https://semver.org).
 
+## [1.2.0] - 2026-11-09
+
+### Added
+
+- The `ship` skill and `ccm line`: sign in with one 8-character e-mail code, publish a built folder to `<name>.myhoster.click`, add a monitor, provision Storage, Payments, Messages or Functions into an env file kept out of git, and add any of the line's 21 MCP servers to Claude Code.
+- Lesson 5, "Ship it".
+
+### Changed
+
+- Lesson 3 now covers `test-truth`; lesson 4 covers `verify` and `critique` with the build skills. Still five lessons of ten minutes.
+
 ## [1.1.0] - 2026-11-09
 
 ### Changed

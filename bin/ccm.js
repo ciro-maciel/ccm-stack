@@ -22,7 +22,17 @@ const HELP = `ccm: your CCM Stack
   ccm voice install             download Phonon for this system (checksum verified)
   ccm voice test [text]         speak a sentence now
   ccm voice on|off              turn the spoken summary on or off
-  ccm voice stop                stop speaking`
+  ccm voice stop                stop speaking
+
+  ccm line                                  sign-in state and every MCP server of the line
+  ccm line login <email> [code]             sign in: sends the 8-character code, then exchanges it
+  ccm line ship <name> --dir <folder>       publish a built site at <name>.myhoster.click
+  ccm line watch <url> [--name <name>]      a monitor on the published address
+  ccm line provision <product> --env <file> [--name <name>]
+                                            storage, functions, monitors, payments or messages;
+                                            keys go to the file (kept out of git), never to the screen
+  ccm line mcp <server|line|all>...         add MCP servers to Claude Code
+  ccm line logout`
 
 function status() {
 	const config = loadConfig()
@@ -73,7 +83,71 @@ async function voice([action, ...rest]) {
 	print(HELP)
 }
 
+function option(list, name) {
+	const index = list.indexOf(name)
+	return index >= 0 ? list[index + 1] : undefined
+}
+
+async function line([action, ...rest]) {
+	const line = await import('../lib/line.js')
+	if (!action || action === 'status') {
+		const saved = line.session()
+		print(saved ? `signed in as ${saved.email} until ${saved.expiresAt.slice(0, 10)}` : 'not signed in: ccm line login <email>', '', 'MCP servers (ccm line mcp <name|line|all>):')
+		const known = line.resources()
+		for (const server of line.MCP_SERVERS) {
+			const note = server.id && !known[server.id] ? `  (needs ${server.id})` : ''
+			print(`  ${server.name.padEnd(26)} ${server.does}${note}`)
+		}
+		return
+	}
+	if (action === 'login') {
+		const [email, code] = rest
+		if (!email) return print('usage: ccm line login <email> [code]')
+		if (!code) {
+			const sent = await line.startSignIn(email)
+			return print(`code sent to ${sent.email}. It is valid for ${Math.round(sent.expiresIn / 60)} minutes. Run: ccm line login ${email} <code>`)
+		}
+		const signed = await line.finishSignIn(email, code)
+		return print(`signed in as ${signed.email} until ${signed.expiresAt.slice(0, 10)}`)
+	}
+	if (action === 'logout') {
+		rmSync(`${line.lineDir()}/session.json`, { force: true })
+		return print('signed out')
+	}
+	if (action === 'ship') {
+		const [name] = rest
+		const result = await line.ship(name, option(rest, '--dir') || '.')
+		return print(`live: ${result.url} (${result.files} files)`)
+	}
+	if (action === 'watch') {
+		const [url] = rest
+		const result = await line.watch(url, option(rest, '--name') || new URL(url).hostname)
+		return print(`watching ${result.url} every 5 minutes as "${result.name}"`)
+	}
+	if (action === 'provision') {
+		const [product] = rest
+		const result = await line.provision(product, { name: option(rest, '--name'), envFile: option(rest, '--env') })
+		print(`${result.product}: ${result.written.join(', ') || 'nothing new'} written to ${result.envFile}`)
+		if (result.missing.length) print(`not returned this time (shown only when created): ${result.missing.join(', ')}`)
+		return
+	}
+	if (action === 'mcp') {
+		const { spawnSync } = await import('node:child_process')
+		for (const server of line.mcpCommands(rest.length ? rest : ['all'])) {
+			if (server.missing) {
+				print(`skip ${server.name}: needs ${server.missing} (create it first with ccm line provision)`)
+				continue
+			}
+			const result = spawnSync(server.command[0], server.command.slice(1), { encoding: 'utf8', shell: platform() === 'win32' })
+			print(`${result.status === 0 ? 'added' : 'not added'} ${server.name}${result.status === 0 ? '' : `: ${(result.stderr || result.stdout || '').trim().split('\n')[0]}`}`)
+		}
+		return print('', 'Each server asks you to sign in once in the browser, the first time it is used.')
+	}
+	print(HELP)
+}
+
 async function main() {
+	if (command === 'line') return line(args)
 	if (command === 'status') return status()
 	if (command === 'doctor') return doctor()
 	if (command === 'config') {

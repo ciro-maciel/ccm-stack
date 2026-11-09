@@ -21,7 +21,7 @@
 		{
 			"id": "start-from-the-person",
 			"title": "Every piece starts from the person who meets it",
-			"lesson": "05-build-for-people",
+			"lesson": "04-build-for-people",
 			"enforcedBy": "skill",
 			"skill": "intent",
 			"isDefaultOn": true
@@ -29,7 +29,7 @@
 		{
 			"id": "write-like-a-person",
 			"title": "Write plainly: no emoji, no filler, no invented numbers",
-			"lesson": "05-build-for-people",
+			"lesson": "04-build-for-people",
 			"enforcedBy": "skill",
 			"skill": "plain-writing",
 			"isDefaultOn": true
@@ -106,7 +106,9 @@
 			"lesson": "02-guardrails",
 			"enforcedBy": "hook",
 			"event": "PreToolUse:Bash|PowerShell",
-			"platforms": ["darwin"],
+			"platforms": [
+				"darwin"
+			],
 			"isDefaultOn": true
 		},
 		{
@@ -146,7 +148,7 @@
 		{
 			"id": "tests-that-prove",
 			"title": "A test counts only if breaking the code turns it red",
-			"lesson": "04-prove-it-works",
+			"lesson": "03-fix-with-proof",
 			"enforcedBy": "skill",
 			"skill": "test-truth",
 			"isDefaultOn": true
@@ -154,7 +156,7 @@
 		{
 			"id": "no-tests-in-ci",
 			"title": "No test, lint or e2e steps in CI workflows",
-			"lesson": "04-prove-it-works",
+			"lesson": "03-fix-with-proof",
 			"enforcedBy": "hook",
 			"event": "PreToolUse:Write|Edit|MultiEdit",
 			"isDefaultOn": false
@@ -162,7 +164,7 @@
 		{
 			"id": "map-every-feature",
 			"title": "Every feature is mapped and proved the way a user reaches it",
-			"lesson": "04-prove-it-works",
+			"lesson": "04-build-for-people",
 			"enforcedBy": "skill",
 			"skill": "verify",
 			"isDefaultOn": true
@@ -170,7 +172,7 @@
 		{
 			"id": "review-before-you-show",
 			"title": "Score your own screenshots before anyone sees them",
-			"lesson": "04-prove-it-works",
+			"lesson": "04-build-for-people",
 			"enforcedBy": "skill",
 			"skill": "critique",
 			"isDefaultOn": true
@@ -178,7 +180,7 @@
 		{
 			"id": "screens-that-respect-people",
 			"title": "No screen waits, lies when empty, or hides a failure",
-			"lesson": "05-build-for-people",
+			"lesson": "04-build-for-people",
 			"enforcedBy": "skill",
 			"skill": "ux-rules",
 			"isDefaultOn": true
@@ -186,7 +188,7 @@
 		{
 			"id": "names-and-language",
 			"title": "Code speaks English; screens speak the reader's language",
-			"lesson": "05-build-for-people",
+			"lesson": "04-build-for-people",
 			"enforcedBy": "skill",
 			"skill": "naming",
 			"isDefaultOn": true
@@ -194,7 +196,7 @@
 		{
 			"id": "standard-webhooks",
 			"title": "Webhooks follow Standard Webhooks",
-			"lesson": "05-build-for-people",
+			"lesson": "04-build-for-people",
 			"enforcedBy": "skill",
 			"skill": "webhooks",
 			"isDefaultOn": true
@@ -202,7 +204,7 @@
 		{
 			"id": "mcp-in-four-tools",
 			"title": "A product's MCP is four tools: guide, read, write, delete",
-			"lesson": "05-build-for-people",
+			"lesson": "04-build-for-people",
 			"enforcedBy": "skill",
 			"skill": "mcp-design",
 			"isDefaultOn": true
@@ -210,9 +212,17 @@
 		{
 			"id": "mac-apps-done-right",
 			"title": "A Mac app opened at login starts in the menu bar",
-			"lesson": "05-build-for-people",
+			"lesson": "04-build-for-people",
 			"enforcedBy": "skill",
 			"skill": "mac-app",
+			"isDefaultOn": true
+		},
+		{
+			"id": "ship-with-the-line",
+			"title": "From the machine to a live, watched address with one e-mail code",
+			"lesson": "05-ship-it",
+			"enforcedBy": "skill",
+			"skill": "ship",
 			"isDefaultOn": true
 		}
 	]

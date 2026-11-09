@@ -18,8 +18,8 @@ Five lessons of ten minutes. The first one has you using it; the other four go d
 1. [Use it now](01-use-it-now.md) · 10 min
 2. [Guardrails](02-guardrails.md) · 10 min
 3. [Fix with proof](03-fix-with-proof.md) · 10 min
-4. [Prove it works](04-prove-it-works.md) · 10 min
-5. [Build for people](05-build-for-people.md) · 10 min
+4. [Build for people](04-build-for-people.md) · 10 min
+5. [Ship it](05-ship-it.md) · 10 min
 <!-- lessons:end -->
 
 Start with [01 · Use it now](01-use-it-now.md).

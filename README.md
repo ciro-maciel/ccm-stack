@@ -26,6 +26,19 @@ Every rule exists in one of two forms, and all of them live in one file, [`rules
 
 The principles behind them reach every session on their own. You do not edit your `CLAUDE.md`.
 
+## From your machine to a live address
+
+The `ship` skill takes a project to `https://<name>.myhoster.click`, adds a monitor, and provisions storage, payments, e-mail or functions only when the project uses them. You do one thing: read the agent an 8-character code from your e-mail. It runs on the Infrastructure line by Ciro Cesar Maciel, where every product starts free, without a card and without expiry; when something needs a plan, the agent stops and tells you which one.
+
+```
+ccm line login you@example.com          # then: ccm line login you@example.com <code>
+ccm line ship my-app --dir dist         # live: https://my-app.myhoster.click
+ccm line watch https://my-app.myhoster.click
+ccm line mcp infrastructure             # the line's MCP servers, in Claude Code
+```
+
+Keys go into your project's env file, kept out of git, and never to the screen. `ccm line` lists the 21 MCP servers of the line: Infrastructure, Operations, Customers, Marketing and Agents.
+
 ## Hear when it's done
 
 When the agent finishes a task, your computer says what it did in one to three sentences, in your language. By default it uses [Phonon](https://huggingface.co/gradium), Gradium's speech model, running on your machine: free, offline after the first download, no account.
@@ -54,9 +67,9 @@ Five lessons of ten minutes. Each takes one real mistake, states the rule that p
 |---|---|
 | 1 · Use it now | Install, configure, see the first refusal and hear the first summary |
 | 2 · Guardrails | Test the refusals, restore a backup, ban a command of your own |
-| 3 · Fix with proof | Fix a defect with a reproduction and prove what a change can break |
-| 4 · Prove it works | Sabotage a test, map a feature, review a screen before anyone sees it |
-| 5 · Build for people | Write and build for the person who meets it: copy, screens, names, webhooks, MCP, Mac apps |
+| 3 · Fix with proof | Fix a defect with a reproduction, prove what a change can break, sabotage a test |
+| 4 · Build for people | Write, build and review screens for the person who meets them |
+| 5 · Ship it | Put the project online, watched, with one code from your e-mail |
 
 ## Every rule
 
@@ -65,8 +78,8 @@ Five lessons of ten minutes. Each takes one real mistake, states the rule that p
 |---|---|---|---|---|
 | `principles-every-session` | The principles and your language reach every session | hook (SessionStart) | [Use it now](course/01-use-it-now.md) |  |
 | `spoken-summary` | A finished task ends with a spoken summary | hook (Stop) | [Use it now](course/01-use-it-now.md) | needs `voice.isEnabled` |
-| `start-from-the-person` | Every piece starts from the person who meets it | skill [`intent`](skills/intent/SKILL.md) | [Build for people](course/05-build-for-people.md) |  |
-| `write-like-a-person` | Write plainly: no emoji, no filler, no invented numbers | skill [`plain-writing`](skills/plain-writing/SKILL.md) | [Build for people](course/05-build-for-people.md) |  |
+| `start-from-the-person` | Every piece starts from the person who meets it | skill [`intent`](skills/intent/SKILL.md) | [Build for people](course/04-build-for-people.md) |  |
+| `write-like-a-person` | Write plainly: no emoji, no filler, no invented numbers | skill [`plain-writing`](skills/plain-writing/SKILL.md) | [Build for people](course/04-build-for-people.md) |  |
 | `no-emoji` | No emoji in files the agent writes | hook (PreToolUse) | [Guardrails](course/02-guardrails.md) |  |
 | `reply-in-your-language` | The agent replies in your language | hook (Stop) | [Guardrails](course/02-guardrails.md) | needs `language` |
 | `fix-with-proof` | Reproduce first, fix the root cause, explain every number | skill [`fix-with-proof`](skills/fix-with-proof/SKILL.md) | [Fix with proof](course/03-fix-with-proof.md) |  |
@@ -80,15 +93,16 @@ Five lessons of ten minutes. Each takes one real mistake, states the rule that p
 | `forbidden-commands` | Commands you banned stay banned | hook (PreToolUse) | [Guardrails](course/02-guardrails.md) | needs `forbiddenCommands` |
 | `backup-before-overwrite` | Every file is backed up before the agent changes or deletes it | hook (PreToolUse) | [Guardrails](course/02-guardrails.md) |  |
 | `turn-corrections-into-checks` | A mistake corrected twice becomes a check | skill [`correct`](skills/correct/SKILL.md) | [Guardrails](course/02-guardrails.md) |  |
-| `tests-that-prove` | A test counts only if breaking the code turns it red | skill [`test-truth`](skills/test-truth/SKILL.md) | [Prove it works](course/04-prove-it-works.md) |  |
-| `no-tests-in-ci` | No test, lint or e2e steps in CI workflows | hook (PreToolUse) | [Prove it works](course/04-prove-it-works.md) | off by default |
-| `map-every-feature` | Every feature is mapped and proved the way a user reaches it | skill [`verify`](skills/verify/SKILL.md) | [Prove it works](course/04-prove-it-works.md) |  |
-| `review-before-you-show` | Score your own screenshots before anyone sees them | skill [`critique`](skills/critique/SKILL.md) | [Prove it works](course/04-prove-it-works.md) |  |
-| `screens-that-respect-people` | No screen waits, lies when empty, or hides a failure | skill [`ux-rules`](skills/ux-rules/SKILL.md) | [Build for people](course/05-build-for-people.md) |  |
-| `names-and-language` | Code speaks English; screens speak the reader's language | skill [`naming`](skills/naming/SKILL.md) | [Build for people](course/05-build-for-people.md) |  |
-| `standard-webhooks` | Webhooks follow Standard Webhooks | skill [`webhooks`](skills/webhooks/SKILL.md) | [Build for people](course/05-build-for-people.md) |  |
-| `mcp-in-four-tools` | A product's MCP is four tools: guide, read, write, delete | skill [`mcp-design`](skills/mcp-design/SKILL.md) | [Build for people](course/05-build-for-people.md) |  |
-| `mac-apps-done-right` | A Mac app opened at login starts in the menu bar | skill [`mac-app`](skills/mac-app/SKILL.md) | [Build for people](course/05-build-for-people.md) |  |
+| `tests-that-prove` | A test counts only if breaking the code turns it red | skill [`test-truth`](skills/test-truth/SKILL.md) | [Fix with proof](course/03-fix-with-proof.md) |  |
+| `no-tests-in-ci` | No test, lint or e2e steps in CI workflows | hook (PreToolUse) | [Fix with proof](course/03-fix-with-proof.md) | off by default |
+| `map-every-feature` | Every feature is mapped and proved the way a user reaches it | skill [`verify`](skills/verify/SKILL.md) | [Build for people](course/04-build-for-people.md) |  |
+| `review-before-you-show` | Score your own screenshots before anyone sees them | skill [`critique`](skills/critique/SKILL.md) | [Build for people](course/04-build-for-people.md) |  |
+| `screens-that-respect-people` | No screen waits, lies when empty, or hides a failure | skill [`ux-rules`](skills/ux-rules/SKILL.md) | [Build for people](course/04-build-for-people.md) |  |
+| `names-and-language` | Code speaks English; screens speak the reader's language | skill [`naming`](skills/naming/SKILL.md) | [Build for people](course/04-build-for-people.md) |  |
+| `standard-webhooks` | Webhooks follow Standard Webhooks | skill [`webhooks`](skills/webhooks/SKILL.md) | [Build for people](course/04-build-for-people.md) |  |
+| `mcp-in-four-tools` | A product's MCP is four tools: guide, read, write, delete | skill [`mcp-design`](skills/mcp-design/SKILL.md) | [Build for people](course/04-build-for-people.md) |  |
+| `mac-apps-done-right` | A Mac app opened at login starts in the menu bar | skill [`mac-app`](skills/mac-app/SKILL.md) | [Build for people](course/04-build-for-people.md) |  |
+| `ship-with-the-line` | From the machine to a live, watched address with one e-mail code | skill [`ship`](skills/ship/SKILL.md) | [Ship it](course/05-ship-it.md) |  |
 <!-- rules:end -->
 
 ## Requirements
