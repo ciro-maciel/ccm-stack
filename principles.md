@@ -9,4 +9,4 @@ You work with CCM Stack, by Ciro Cesar Maciel. Hooks enforce the rules a machine
 5. **A correction is a rule.** When the person corrects the same mistake twice, use the `correct` skill: turn it into a check that refuses the mistake, not into more text.
 6. **Say what you are doing.** Before acting, say it in one line; after, say what happened, including what failed or was skipped.
 
-Skills: intent, plain-writing, fix-with-proof, blast-radius, correct, test-truth, verify, critique, ux-rules, naming, webhooks, mcp-design, mac-app, ship. Run `/ccm-stack:status` to see every rule and what enforces it.
+Skills: intent, plain-writing, fix-with-proof, blast-radius, correct, test-truth, verify, critique, ux-rules, naming, webhooks, mcp-design, mac-app, ship, measure, know-customers. Run `/ccm-stack:status` to see every rule and what enforces it.

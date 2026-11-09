@@ -37,6 +37,8 @@ ccm line watch https://my-app.myhoster.click
 ccm line mcp infrastructure             # the line's MCP servers, in Claude Code
 ```
 
+Then `measure` adds Operations Analytics (one script line, numbers read in the conversation) and `know-customers` sends the app's sign-ups, activations and payments to Customers People, so the agent can tell where each customer is. Each of those lines is the same account and asks for the e-mail code once.
+
 Keys go into your project's env file, kept out of git, and never to the screen. `ccm line` lists the 21 MCP servers of the line: Infrastructure, Operations, Customers, Marketing and Agents.
 
 ## Hear when it's done
@@ -103,6 +105,8 @@ Five lessons of ten minutes. Each takes one real mistake, states the rule that p
 | `mcp-in-four-tools` | A product's MCP is four tools: guide, read, write, delete | skill [`mcp-design`](skills/mcp-design/SKILL.md) | [Build for people](course/04-build-for-people.md) |  |
 | `mac-apps-done-right` | A Mac app opened at login starts in the menu bar | skill [`mac-app`](skills/mac-app/SKILL.md) | [Build for people](course/04-build-for-people.md) |  |
 | `ship-with-the-line` | From the machine to a live, watched address with one e-mail code | skill [`ship`](skills/ship/SKILL.md) | [Ship it](course/05-ship-it.md) |  |
+| `measure-what-is-live` | Every live address is measured, and its numbers are read in the conversation | skill [`measure`](skills/measure/SKILL.md) | [Ship it](course/05-ship-it.md) |  |
+| `know-every-customer` | The app's own moments tell where every customer is | skill [`know-customers`](skills/know-customers/SKILL.md) | [Ship it](course/05-ship-it.md) |  |
 <!-- rules:end -->
 
 ## Requirements

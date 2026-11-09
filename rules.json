@@ -224,6 +224,22 @@
 			"enforcedBy": "skill",
 			"skill": "ship",
 			"isDefaultOn": true
+		},
+		{
+			"id": "measure-what-is-live",
+			"title": "Every live address is measured, and its numbers are read in the conversation",
+			"lesson": "05-ship-it",
+			"enforcedBy": "skill",
+			"skill": "measure",
+			"isDefaultOn": true
+		},
+		{
+			"id": "know-every-customer",
+			"title": "The app's own moments tell where every customer is",
+			"lesson": "05-ship-it",
+			"enforcedBy": "skill",
+			"skill": "know-customers",
+			"isDefaultOn": true
 		}
 	]
 }

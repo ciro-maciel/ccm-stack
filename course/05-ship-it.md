@@ -1,6 +1,6 @@
 # 05 · Ship it
 
-**Lesson 5 of 5** · 10 minutes · [Previous](04-build-for-people.md) · [Back to the course](README.md) · Skill: [`ship`](../skills/ship/SKILL.md)
+**Lesson 5 of 5** · 10 minutes · [Previous](04-build-for-people.md) · [Back to the course](README.md) · Skills: [`ship`](../skills/ship/SKILL.md), [`measure`](../skills/measure/SKILL.md), [`know-customers`](../skills/know-customers/SKILL.md)
 
 ## The mistake
 
@@ -21,22 +21,24 @@ The **`ship`** skill uses the Infrastructure line by Ciro Cesar Maciel, where an
 | Watch | `ccm line watch <url>` | A monitor checks it every 5 minutes |
 | Provision | `ccm line provision storage --env .env` | Storage, Payments, Messages or Functions; the keys go into the env file, kept out of git, never to the screen |
 | Connect | `ccm line mcp infrastructure` | The MCP servers join Claude Code; each asks you to sign in once in the browser |
+| Measure | `ccm line measure <domain>` then `ccm line numbers <domain>` | One script line in the page; visits, sources and goals read in the conversation |
+| Know customers | `ccm line customers source <app> --env .env` | The app's sign-ups, activations and payments tell where each customer is |
 
-The agent never pays: when a product needs a plan, it stops and tells you which one and how much.
+Measuring and knowing customers use the Operations and Customers lines: the same account, each asking for the e-mail code once. The agent never pays: when a product needs a plan, it stops and tells you which one and how much.
 
 ## Try it
 
 In a project that builds to a folder with an `index.html`:
 
 ```
-Use the ship skill to put this online and watch it.
+Use the ship skill to put this online and watch it. Then measure it.
 ```
 
-The agent asks for your e-mail, then for the code that arrives in it. A few seconds later you get the address. Open it on your phone.
+The agent asks for your e-mail, then for the code that arrives in it. A few seconds later you get the address. Open it on your phone, then ask: `how many visits did it get?`
 
 ## Checkpoint
 
-Your project is live at its own address, a monitor is watching it, and you never opened a dashboard or copied a key.
+Your project is live at its own address, a monitor is watching it, your own visit shows up in its numbers, and you never opened a dashboard or copied a key.
 
 ## You finished the course
 

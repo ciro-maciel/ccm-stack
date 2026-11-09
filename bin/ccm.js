@@ -25,12 +25,20 @@ const HELP = `ccm: your CCM Stack
   ccm voice stop                stop speaking
 
   ccm line                                  sign-in state and every MCP server of the line
-  ccm line login <email> [code]             sign in: sends the 8-character code, then exchanges it
+  ccm line login <email> [code] [--line <line>]
+                                            sign in: sends the 8-character code, then exchanges it;
+                                            --line operations or customers (default infrastructure)
   ccm line ship <name> --dir <folder>       publish a built site at <name>.myhoster.click
   ccm line watch <url> [--name <name>]      a monitor on the published address
   ccm line provision <product> --env <file> [--name <name>]
                                             storage, functions, monitors, payments or messages;
                                             keys go to the file (kept out of git), never to the screen
+  ccm line measure <domain> [--spa] [--mcp] the Analytics site and the one-line script to add
+  ccm line numbers <domain> [--days 7|30|90] visits, views and goals, read in the conversation
+  ccm line customers source <name> --env <file>
+                                            a People source; its URL and secret go to the file
+  ccm line customers send <type> <email> --env <file>
+                                            one signed event, to prove the source receives
   ccm line mcp <server|line|all>...         add MCP servers to Claude Code
   ccm line logout`
 
@@ -91,8 +99,11 @@ function option(list, name) {
 async function line([action, ...rest]) {
 	const line = await import('../lib/line.js')
 	if (!action || action === 'status') {
-		const saved = line.session()
-		print(saved ? `signed in as ${saved.email} until ${saved.expiresAt.slice(0, 10)}` : 'not signed in: ccm line login <email>', '', 'MCP servers (ccm line mcp <name|line|all>):')
+		for (const name of line.SIGN_IN_LINES) {
+			const saved = line.session(name)
+			print(`${name.padEnd(15)} ${saved ? `signed in as ${saved.email} until ${saved.expiresAt.slice(0, 10)}` : `not signed in: ccm line login <email>${name === 'infrastructure' ? '' : ` --line ${name}`}`}`)
+		}
+		print('', 'MCP servers (ccm line mcp <name|line|all>):')
 		const known = line.resources()
 		for (const server of line.MCP_SERVERS) {
 			const note = server.id && !known[server.id] ? `  (needs ${server.id})` : ''
@@ -101,18 +112,48 @@ async function line([action, ...rest]) {
 		return
 	}
 	if (action === 'login') {
-		const [email, code] = rest
-		if (!email) return print('usage: ccm line login <email> [code]')
+		const positional = rest.filter((word, index) => !word.startsWith('--') && !rest[index - 1]?.startsWith('--'))
+		const [email, code] = positional
+		const lineName = option(rest, '--line') || 'infrastructure'
+		if (!email) return print('usage: ccm line login <email> [code] [--line <line>]')
+		const flag = lineName === 'infrastructure' ? '' : ` --line ${lineName}`
 		if (!code) {
-			const sent = await line.startSignIn(email)
-			return print(`code sent to ${sent.email}. It is valid for ${Math.round(sent.expiresIn / 60)} minutes. Run: ccm line login ${email} <code>`)
+			const sent = await line.startSignIn(email, lineName)
+			return print(`code sent to ${sent.email} for the ${lineName} line. It is valid for ${Math.round(sent.expiresIn / 60)} minutes. Run: ccm line login ${email} <code>${flag}`)
 		}
-		const signed = await line.finishSignIn(email, code)
-		return print(`signed in as ${signed.email} until ${signed.expiresAt.slice(0, 10)}`)
+		const signed = await line.finishSignIn(email, code, lineName)
+		return print(`signed in to ${lineName} as ${signed.email} until ${signed.expiresAt.slice(0, 10)}`)
 	}
 	if (action === 'logout') {
-		rmSync(`${line.lineDir()}/session.json`, { force: true })
-		return print('signed out')
+		for (const name of line.SIGN_IN_LINES) rmSync(line.sessionFile(name), { force: true })
+		return print('signed out of every line on this machine')
+	}
+	if (action === 'measure') {
+		const [domain] = rest
+		const result = await line.measure(domain, { isSpa: rest.includes('--spa'), kind: rest.includes('--mcp') ? 'mcp' : 'web' })
+		if (result.isMcp) {
+			print(`Analytics site ${result.id} for the MCP server ${domain}.`)
+			return print(result.serverKey ? 'Its server key is in the Analytics panel, Settings; then run in the server project: npx @ciromaciel/analytics mcp init --key <ask_ key>' : 'Get its server key (ask_) in the Analytics panel, Settings.')
+		}
+		return print(`Analytics site ${result.id} for ${domain}. Add this line to the <head> of every page:`, '', result.snippet, '', 'Only the real domain counts: localhost and preview addresses are not measured.')
+	}
+	if (action === 'numbers') {
+		const [domain] = rest
+		const data = await line.numbers(domain, Number(option(rest, '--days') || 7))
+		return print(JSON.stringify(data, null, 2))
+	}
+	if (action === 'customers') {
+		const [sub, first, second] = rest
+		const envFile = option(rest, '--env')
+		if (sub === 'source') {
+			const result = await line.customerSource(first, { envFile })
+			return print(`People source "${result.name}": ${result.written.join(', ')} written to ${result.envFile}`)
+		}
+		if (sub === 'send') {
+			const result = await line.sendCustomerEvent(envFile, { type: first, data: { person: { email: second }, channel: 'web' } })
+			return print(`accepted ${result.accepted}, duplicates ${result.duplicates}${result.events?.[0]?.stage ? `, stage ${result.events[0].stage}` : ''}${result.test ? ' (test event: checked, not stored)' : ''}`)
+		}
+		return print('usage: ccm line customers source <name> --env <file> | ccm line customers send <type> <email> --env <file>')
 	}
 	if (action === 'ship') {
 		const [name] = rest

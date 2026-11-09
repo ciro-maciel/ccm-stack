@@ -2,6 +2,19 @@
 
 All notable changes are listed here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and versions follow [Semantic Versioning](https://semver.org).
 
+## [1.3.0] - 2026-11-09
+
+### Added
+
+- The `measure` skill and `ccm line measure` / `numbers`: an Operations Analytics site, its script line, and visits, sources and goals read in the conversation.
+- The `know-customers` skill and `ccm line customers source` / `send`: a Customers People source, its URL and secret in the env file, and signed events from the app.
+- `ccm line login --line operations|customers`: one session per line, same account.
+
+### Fixed
+
+- `sed-word-boundary` refused a command when the `\b` belonged to a `grep` next to the `sed`. Only the sed command's own words count now.
+- `test-email-only` refused `test+tag@` addresses, which reach the same test inbox.
+
 ## [1.2.0] - 2026-11-09
 
 ### Added

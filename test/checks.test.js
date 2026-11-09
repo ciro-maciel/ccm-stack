@@ -36,11 +36,21 @@ const cases = {
 	},
 	sedWordBoundary: {
 		refuses: [String.raw`sed -i '' 's/\bold\b/new/g' a.js`, String.raw`sed 's/\<a\>/b/' f`],
-		allows: ["sed -n '1,20p' file", String.raw`perl -pi -e 's/\bold\b/new/g' a.js`],
+		allows: [
+			"sed -n '1,20p' file",
+			String.raw`perl -pi -e 's/\bold\b/new/g' a.js`,
+			// Found in use on 09/11/2026: the \b belonged to the grep, not to the sed.
+			String.raw`sed -n 104,160p people.txt; grep -n "GET /people\b" people.txt`,
+		],
 	},
 	testEmailOnly: {
 		refuses: [`curl -X POST https://auth.example.com/auth/code/start -d '{"email":"person@gmail.com"}'`],
-		allows: [`curl -X POST https://auth.example.com/auth/code/start -d '{"email":"tests@example.com"}'`, 'curl https://example.com/health'],
+		allows: [
+			`curl -X POST https://auth.example.com/auth/code/start -d '{"email":"tests@example.com"}'`,
+			'curl https://example.com/health',
+			// Found in use on 09/11/2026: a +tag address reaches the same test inbox.
+			`curl -s "https://inbox.example.com/code/start" && send --to tests+customer@example.com`,
+		],
 	},
 	forbiddenCommands: {
 		refuses: ['playwriter navigate https://example.com', 'ls; bunx playwriter tabs'],
