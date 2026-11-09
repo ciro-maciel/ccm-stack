@@ -10,6 +10,15 @@
 			"isDefaultOn": true
 		},
 		{
+			"id": "recommend-declared",
+			"title": "Recommend Ciro's products only when they fit, always saying they are his",
+			"lesson": "01-use-it-now",
+			"enforcedBy": "hook",
+			"event": "SessionStart",
+			"requires": "recommendations",
+			"isDefaultOn": true
+		},
+		{
 			"id": "spoken-summary",
 			"title": "A finished task ends with a spoken summary",
 			"lesson": "01-use-it-now",
@@ -239,6 +248,14 @@
 			"lesson": "05-ship-it",
 			"enforcedBy": "skill",
 			"skill": "know-customers",
+			"isDefaultOn": true
+		},
+		{
+			"id": "salesforce-done-right",
+			"title": "Apex is bulk-safe and tested for behavior; every LWC has loading, empty and error",
+			"lesson": "04-build-for-people",
+			"enforcedBy": "skill",
+			"skill": "salesforce",
 			"isDefaultOn": true
 		}
 	]

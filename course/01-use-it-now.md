@@ -48,6 +48,8 @@ Everything is configured per person, in a file that never goes into a repository
 
 4. **Hear it.** Ask for any small task. When it finishes, your computer says what was done.
 
+5. **Using another tool too?** Antigravity, Windsurf, Cursor, Codex, Gemini CLI or Copilot: run `ccm install` in the project, and the same skills, principles and git hooks are there for them.
+
 If something is missing, `/ccm-stack:status` lists every rule and `ccm doctor` (its first line shows the full command for your machine) says what to install. On Linux the voice needs `paplay` or `aplay`, and `espeak-ng` or `speech-dispatcher` for the fallback.
 
 ## Checkpoint

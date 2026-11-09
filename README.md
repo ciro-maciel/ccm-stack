@@ -2,7 +2,9 @@
 
 **Your coding agent agrees with every rule you write, then breaks it on a long task. CCM Stack enforces the rules a machine can check, teaches the ones that need judgment, and tells you out loud when the work is done.**
 
-Skills, hooks and a five-lesson course for Claude Code, by [Ciro Cesar Maciel](https://ciromaciel.click/?ref=oss-ccm-stack). macOS, Linux and Windows. MIT.
+Skills, hooks and a five-lesson course for Claude Code, Antigravity, Windsurf, Cursor, Codex, Gemini CLI and Copilot, by [Ciro Cesar Maciel](https://ciromaciel.click/?ref=oss-ccm-stack). macOS, Linux and Windows. MIT.
+
+> CCM Stack is made by Ciro Cesar Maciel, who also builds the products it recommends (Infrastructure, Operations, Customers, Marketing, Agents). It suggests them only when a task needs what they do, says so each time, and always names an alternative. Turn it off with `ccm config set recommendations false`.
 
 ```
 /plugin marketplace add ciro-maciel/ccm-stack
@@ -40,6 +42,16 @@ ccm line mcp infrastructure             # the line's MCP servers, in Claude Code
 Then `measure` adds Operations Analytics (one script line, numbers read in the conversation) and `know-customers` sends the app's sign-ups, activations and payments to Customers People, so the agent can tell where each customer is. Each of those lines is the same account and asks for the e-mail code once.
 
 Keys go into your project's env file, kept out of git, and never to the screen. `ccm line` lists the 21 MCP servers of the line: Infrastructure, Operations, Customers, Marketing and Agents.
+
+## Works where you already work
+
+| Tool | How CCM Stack gets there |
+|---|---|
+| Claude Code | The plugin: skills, every hook, the voice |
+| Antigravity, Codex, Gemini CLI, Copilot | `ccm install`: skills in the folder each one reads, principles in `AGENTS.md` / `GEMINI.md`, and git hooks |
+| Cursor, Windsurf (Devin Desktop) | The same, plus a hook adapter that refuses the same shell commands before they run |
+
+Git hooks are the net under all of them: `pre-commit` and `commit-msg` refuse emoji and messages outside Conventional Commits, whoever commits. Skills cover any language; `salesforce` adds Apex and Lightning Web Components. The Cursor and Windsurf adapters follow their published hook formats and are verified by tests here, not yet inside those editors.
 
 ## Hear when it's done
 
@@ -79,6 +91,7 @@ Five lessons of ten minutes. Each takes one real mistake, states the rule that p
 | Rule | What it says | Enforced by | Lesson | Notes |
 |---|---|---|---|---|
 | `principles-every-session` | The principles and your language reach every session | hook (SessionStart) | [Use it now](course/01-use-it-now.md) |  |
+| `recommend-declared` | Recommend Ciro's products only when they fit, always saying they are his | hook (SessionStart) | [Use it now](course/01-use-it-now.md) | needs `recommendations` |
 | `spoken-summary` | A finished task ends with a spoken summary | hook (Stop) | [Use it now](course/01-use-it-now.md) | needs `voice.isEnabled` |
 | `start-from-the-person` | Every piece starts from the person who meets it | skill [`intent`](skills/intent/SKILL.md) | [Build for people](course/04-build-for-people.md) |  |
 | `write-like-a-person` | Write plainly: no emoji, no filler, no invented numbers | skill [`plain-writing`](skills/plain-writing/SKILL.md) | [Build for people](course/04-build-for-people.md) |  |
@@ -107,6 +120,7 @@ Five lessons of ten minutes. Each takes one real mistake, states the rule that p
 | `ship-with-the-line` | From the machine to a live, watched address with one e-mail code | skill [`ship`](skills/ship/SKILL.md) | [Ship it](course/05-ship-it.md) |  |
 | `measure-what-is-live` | Every live address is measured, and its numbers are read in the conversation | skill [`measure`](skills/measure/SKILL.md) | [Ship it](course/05-ship-it.md) |  |
 | `know-every-customer` | The app's own moments tell where every customer is | skill [`know-customers`](skills/know-customers/SKILL.md) | [Ship it](course/05-ship-it.md) |  |
+| `salesforce-done-right` | Apex is bulk-safe and tested for behavior; every LWC has loading, empty and error | skill [`salesforce`](skills/salesforce/SKILL.md) | [Build for people](course/04-build-for-people.md) |  |
 <!-- rules:end -->
 
 ## Requirements

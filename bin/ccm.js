@@ -24,6 +24,11 @@ const HELP = `ccm: your CCM Stack
   ccm voice on|off              turn the spoken summary on or off
   ccm voice stop                stop speaking
 
+  ccm install [--tool <tool|all>]... [--project <dir>]
+                                            put CCM Stack in this project for antigravity, windsurf,
+                                            cursor, codex, gemini-cli, copilot (default all), plus git hooks
+  ccm check pre-commit | commit-msg <file>  what the git hooks run
+
   ccm line                                  sign-in state and every MCP server of the line
   ccm line login <email> [code] [--line <line>]
                                             sign in: sends the 8-character code, then exchanges it;
@@ -187,7 +192,50 @@ async function line([action, ...rest]) {
 	print(HELP)
 }
 
+async function installCommand(rest) {
+	const { install, TOOL_NAMES } = await import('../lib/install.js')
+	const tools = []
+	rest.forEach((word, index) => {
+		if (rest[index - 1] === '--tool') tools.push(...word.split(','))
+	})
+	const project = option(rest, '--project') || process.cwd()
+	const report = install(project, tools.length ? tools : ['all'], loadConfig())
+	print(
+		`runtime: ${report.runtime}`,
+		...report.skills.map((item) => `skills: ${item.count} in ${item.folder}`),
+		`instructions: ${report.instructions.join(', ')}`,
+		...report.hooks.map((item) => `hooks: ${item}`),
+		report.git ? `git hooks: pre-commit and commit-msg in ${report.git}` : 'git hooks: not a git repository, skipped',
+		'',
+		`Tools: ${TOOL_NAMES.join(', ')}. Claude Code uses the plugin instead. Run again after updating CCM Stack.`,
+	)
+}
+
+async function checkCommand([stage, file]) {
+	const gitcheck = await import('../lib/gitcheck.js')
+	const config = loadConfig()
+	if (stage === 'pre-commit') {
+		const problems = gitcheck.checkStaged(config)
+		if (problems.length) {
+			console.error(`CCM Stack refused this commit:\n${problems.map((item) => `- ${item}`).join('\n')}`)
+			process.exit(1)
+		}
+		return
+	}
+	if (stage === 'commit-msg') {
+		const problem = gitcheck.checkCommitMessage(file, config)
+		if (problem) {
+			console.error(`CCM Stack refused this commit message: ${problem}`)
+			process.exit(1)
+		}
+		return
+	}
+	print('usage: ccm check pre-commit | ccm check commit-msg <file>')
+}
+
 async function main() {
+	if (command === 'install') return installCommand(args)
+	if (command === 'check') return checkCommand(args)
 	if (command === 'line') return line(args)
 	if (command === 'status') return status()
 	if (command === 'doctor') return doctor()

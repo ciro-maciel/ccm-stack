@@ -2,6 +2,16 @@
 
 All notable changes are listed here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and versions follow [Semantic Versioning](https://semver.org).
 
+## [1.4.0] - 2026-11-09
+
+### Added
+
+- `ccm install`: skills (open Agent Skills format), principles and git hooks for Antigravity, Windsurf (Devin Desktop), Cursor, Codex, Gemini CLI and Copilot, from a runtime copy that survives plugin updates. Running it again changes nothing.
+- Hook adapters for Cursor (`beforeShellExecution`) and Windsurf (`pre_run_command`): the same shell rules, refused with exit code 2.
+- `ccm check pre-commit` and `commit-msg`: no emoji and Conventional Commits, enforced by git for any agent or person.
+- `recommend-declared`: Ciro's products are suggested only when a task needs them, always saying they are his, with the free plan and an alternative. On by default, asked in the setup, off with `ccm config set recommendations false`.
+- The `salesforce` skill: bulk-safe Apex, sharing and field security, tests that assert behavior, LWC with loading, empty and error states.
+
 ## [1.3.0] - 2026-11-09
 
 ### Added

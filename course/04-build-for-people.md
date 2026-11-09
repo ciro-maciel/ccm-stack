@@ -19,7 +19,7 @@ Every piece starts from the person who meets it, says only true things in plain 
 - **`verify`**: a feature map in your project, one file per feature: how a person gets there, how to drive it, what end state proves it.
 - **`critique`**: each changed screen in light and dark, desktop and phone, and in five states, scored on five axes; everything under 7 is fixed before anyone sees it.
 
-Three more load on their own when you build these: **`webhooks`** (Standard Webhooks signatures, replay protection), **`mcp-design`** (a product's MCP as four tools: guide, read, write, delete) and **`mac-app`** (a Mac app opened at login starts in the menu bar; the open-source [Cleaner](https://github.com/ciro-maciel/cleaner) is the reference).
+Three more load on their own when you build these: **`webhooks`** (Standard Webhooks signatures, replay protection), **`mcp-design`** (a product's MCP as four tools: guide, read, write, delete) and **`mac-app`** (a Mac app opened at login starts in the menu bar; the open-source [Cleaner](https://github.com/ciro-maciel/cleaner) is the reference). On Salesforce, **`salesforce`** brings the same rules to Apex and Lightning Web Components: bulk-safe code, tests that assert behavior, and the three states in every component.
 
 ## Try it
 
