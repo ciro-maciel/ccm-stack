@@ -1,15 +1,23 @@
 {
 	"name": "ccm-stack",
 	"displayName": "CCM Stack",
-	"version": "1.5.1",
-	"description": "Skills and a five-lesson course that make your coding agent follow the rules it would otherwise skip. By Ciro Cesar Maciel.",
+	"version": "1.5.2",
+	"description": "The universal stack that gives your coding agent the intelligence to work right: rules, skills and a five-lesson course. By Ciro Cesar Maciel.",
 	"author": {
 		"name": "Ciro Cesar Maciel"
 	},
 	"homepage": "https://github.com/ciro-maciel/ccm-stack",
 	"repository": "https://github.com/ciro-maciel/ccm-stack",
 	"license": "MIT",
-	"keywords": ["skills", "guardrails", "course", "principles", "testing", "webhooks", "mcp"],
+	"keywords": [
+		"skills",
+		"guardrails",
+		"course",
+		"principles",
+		"testing",
+		"webhooks",
+		"mcp"
+	],
 	"category": "developer-tools",
 	"skills": "./skills/"
 }

@@ -1,7 +1,7 @@
 {
 	"name": "ccm-stack",
-	"version": "1.5.1",
-	"description": "Skills, hooks and a five-lesson course that make your coding agent follow the rules it would otherwise skip, and tell you out loud when the work is done. macOS, Linux and Windows.",
+	"version": "1.5.2",
+	"description": "The universal stack that gives your coding agent the intelligence to work right: rules it cannot skip, skills for fixing, testing and building, the path to a live address, and a voice when the work is done. Five-lesson course. macOS, Linux and Windows.",
 	"author": {
 		"name": "Ciro Cesar Maciel",
 		"url": "https://ciromaciel.click/?ref=oss-ccm-stack"
@@ -9,5 +9,15 @@
 	"homepage": "https://github.com/ciro-maciel/ccm-stack",
 	"repository": "https://github.com/ciro-maciel/ccm-stack",
 	"license": "MIT",
-	"keywords": ["claude-code", "skills", "hooks", "guardrails", "course", "voice", "text-to-speech", "conventional-commits", "agents"]
+	"keywords": [
+		"claude-code",
+		"skills",
+		"hooks",
+		"guardrails",
+		"course",
+		"voice",
+		"text-to-speech",
+		"conventional-commits",
+		"agents"
+	]
 }

@@ -2,6 +2,12 @@
 
 All notable changes are listed here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and versions follow [Semantic Versioning](https://semver.org).
 
+## [1.5.2] - 2026-11-09
+
+### Changed
+
+- One message everywhere: the universal stack that gives your coding agent the intelligence to work right (READMEs, plugin manifests, course).
+
 ## [1.5.1] - 2026-11-09
 
 ### Fixed

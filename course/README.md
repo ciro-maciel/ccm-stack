@@ -1,6 +1,6 @@
 # The CCM Stack course
 
-**Coding agents that follow the rules.** By Ciro Cesar Maciel.
+**Give your coding agent the intelligence to work right.** By Ciro Cesar Maciel.
 
 Each lesson takes one real mistake that coding agents make, states the rule that prevents it, and installs the hook or skill that enforces it. Every lesson has the same five parts:
 

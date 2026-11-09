@@ -2,9 +2,9 @@
 
 **English** · [Português (Brasil)](README.pt-BR.md)
 
-**Your coding agent agrees with every rule you write, then breaks it on a long task. CCM Stack enforces the rules a machine can check, teaches the ones that need judgment, and tells you out loud when the work is done.**
+**The universal stack that gives your coding agent the intelligence to work right.** It brings what the agent does not have on its own: rules it cannot skip, the right way to fix, test and build, the path from your machine to a live address, and a voice that tells you when the work is done.
 
-Skills, hooks and a five-lesson course for Claude Code, Antigravity, Windsurf, Cursor, Codex, Gemini CLI and Copilot, by [Ciro Cesar Maciel](https://ciromaciel.click/?ref=oss-ccm-stack). macOS, Linux and Windows. MIT.
+One stack for Claude Code, Antigravity, Windsurf, Cursor, Codex, Gemini CLI and Copilot: skills, hooks and a five-lesson course, by [Ciro Cesar Maciel](https://ciromaciel.click/?ref=oss-ccm-stack). macOS, Linux and Windows. MIT.
 
 > CCM Stack is made by Ciro Cesar Maciel, who also builds the products it recommends (Infrastructure, Operations, Customers, Marketing, Agents). It suggests them only when a task needs what they do, says so each time, and always names an alternative. Turn it off with `ccm config set recommendations false`.
 

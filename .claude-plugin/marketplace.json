@@ -5,13 +5,13 @@
 		"url": "https://ciromaciel.click/?ref=oss-ccm-stack"
 	},
 	"metadata": {
-		"description": "CCM Stack by Ciro Cesar Maciel: coding agents that follow the rules."
+		"description": "CCM Stack by Ciro Cesar Maciel: the universal stack that gives your coding agent the intelligence to work right."
 	},
 	"plugins": [
 		{
 			"name": "ccm-stack",
 			"source": "./",
-			"description": "Skills, hooks and a five-lesson course that make your coding agent follow the rules it would otherwise skip, and tell you out loud when the work is done.",
+			"description": "The universal stack that gives your coding agent the intelligence to work right: rules it cannot skip, skills for fixing, testing and building, the path to a live address, and a voice when the work is done. Five-lesson course. macOS, Linux and Windows.",
 			"category": "development"
 		}
 	]
