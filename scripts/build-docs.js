@@ -7,7 +7,6 @@ import { join } from 'node:path'
 import { ROOT, RULES } from '../lib/rules.js'
 
 const isCheck = process.argv.includes('--check')
-const MODULES = { 0: 'Start', 1: 'Work', 2: 'Prove', 3: 'Build' }
 
 export function lessons() {
 	return readdirSync(join(ROOT, 'course'))
@@ -16,8 +15,8 @@ export function lessons() {
 		.map((file) => {
 			const text = readFileSync(join(ROOT, 'course', file), 'utf8')
 			const title = text.match(/^# \d{2} · (.+)$/m)[1]
-			const [, module, minutes] = text.match(/\*\*Module (\d) · \w+\*\* · (\d+) minutes/)
-			return { id: file.replace(/\.md$/, ''), file, title, module: Number(module), minutes: Number(minutes) }
+			const [, minutes] = text.match(/\*\*Lesson \d of \d\*\* · (\d+) minutes/)
+			return { id: file.replace(/\.md$/, ''), file, title, minutes: Number(minutes) }
 		})
 }
 
@@ -37,14 +36,8 @@ export function rulesTable() {
 export function courseIndex() {
 	const all = lessons()
 	const total = all.reduce((sum, lesson) => sum + lesson.minutes, 0)
-	const parts = [`${all.length} lessons, about ${Math.round(total / 60)} hours.`]
-	for (const [number, name] of Object.entries(MODULES)) {
-		parts.push('', `### Module ${number} · ${name}`, '')
-		for (const lesson of all.filter((item) => item.module === Number(number))) {
-			parts.push(`${lesson.id.slice(0, 2)}. [${lesson.title}](${lesson.file}) · ${lesson.minutes} min`)
-		}
-	}
-	return parts.join('\n')
+	const rows = all.map((lesson) => `${Number(lesson.id.slice(0, 2))}. [${lesson.title}](${lesson.file}) · ${lesson.minutes} min`)
+	return [`${all.length} lessons, ${total} minutes in all.`, '', ...rows].join('\n')
 }
 
 function replaceBetween(path, marker, content) {

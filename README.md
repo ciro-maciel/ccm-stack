@@ -2,7 +2,7 @@
 
 **Your coding agent agrees with every rule you write, then breaks it on a long task. CCM Stack enforces the rules a machine can check, teaches the ones that need judgment, and tells you out loud when the work is done.**
 
-Skills, hooks and a 16-lesson course for Claude Code, by [Ciro Cesar Maciel](https://ciromaciel.click/?ref=oss-ccm-stack). macOS, Linux and Windows. MIT.
+Skills, hooks and a five-lesson course for Claude Code, by [Ciro Cesar Maciel](https://ciromaciel.click/?ref=oss-ccm-stack). macOS, Linux and Windows. MIT.
 
 ```
 /plugin marketplace add ciro-maciel/ccm-stack
@@ -48,46 +48,47 @@ For commercial use in those languages, choose your system's built-in voice (free
 
 ## The course
 
-Each lesson takes one real mistake, states the rule that prevents it, installs what enforces it, and has you make the mistake on purpose to watch it get refused. [Start the course](course/README.md).
+Five lessons of ten minutes. Each takes one real mistake, states the rule that prevents it, and has you make the mistake on purpose to watch it get refused. The first one has you using CCM Stack in ten minutes. [Start the course](course/README.md).
 
-| Module | Lessons |
+| Lesson | In ten minutes you |
 |---|---|
-| 0 · Start | Install and configure · Hear when it's done |
-| 1 · Work | Start from the person · Write like a person · Fix with proof · Know what a change breaks · Guardrails · Turn corrections into checks |
-| 2 · Prove | Tests that prove something · Map every feature · Review before you show |
-| 3 · Build | Screens that respect people · Names and language · Webhooks the standard way · An MCP in four tools · Mac apps done right |
+| 1 · Use it now | Install, configure, see the first refusal and hear the first summary |
+| 2 · Guardrails | Test the refusals, restore a backup, ban a command of your own |
+| 3 · Fix with proof | Fix a defect with a reproduction and prove what a change can break |
+| 4 · Prove it works | Sabotage a test, map a feature, review a screen before anyone sees it |
+| 5 · Build for people | Write and build for the person who meets it: copy, screens, names, webhooks, MCP, Mac apps |
 
 ## Every rule
 
 <!-- rules:start -->
 | Rule | What it says | Enforced by | Lesson | Notes |
 |---|---|---|---|---|
-| `principles-every-session` | The principles and your language reach every session | hook (SessionStart) | [Start](course/00-start.md) |  |
-| `spoken-summary` | A finished task ends with a spoken summary | hook (Stop) | [Hear when it's done](course/01-hear-when-its-done.md) | needs `voice.isEnabled` |
-| `start-from-the-person` | Every piece starts from the person who meets it | skill [`intent`](skills/intent/SKILL.md) | [Start from the person](course/02-start-from-the-person.md) |  |
-| `write-like-a-person` | Write plainly: no emoji, no filler, no invented numbers | skill [`plain-writing`](skills/plain-writing/SKILL.md) | [Write like a person](course/03-write-like-a-person.md) |  |
-| `no-emoji` | No emoji in files the agent writes | hook (PreToolUse) | [Write like a person](course/03-write-like-a-person.md) |  |
-| `reply-in-your-language` | The agent replies in your language | hook (Stop) | [Write like a person](course/03-write-like-a-person.md) | needs `language` |
-| `fix-with-proof` | Reproduce first, fix the root cause, explain every number | skill [`fix-with-proof`](skills/fix-with-proof/SKILL.md) | [Fix with proof](course/04-fix-with-proof.md) |  |
-| `know-what-a-change-breaks` | Prove the one fact that makes a change safe | skill [`blast-radius`](skills/blast-radius/SKILL.md) | [Know what a change breaks](course/05-know-what-a-change-breaks.md) |  |
-| `private-repos-stay-private` | A private repository never becomes public | hook (PreToolUse) | [Guardrails](course/06-guardrails.md) |  |
-| `stage-only-your-files` | Commit only your own files, by exact path | hook (PreToolUse) | [Guardrails](course/06-guardrails.md) |  |
-| `conventional-commits` | Commit messages follow Conventional Commits | hook (PreToolUse) | [Guardrails](course/06-guardrails.md) |  |
-| `one-package-manager` | One package manager per setup | hook (PreToolUse) | [Guardrails](course/06-guardrails.md) | needs `packageManager` |
-| `sed-word-boundary` | No \b in macOS sed, which silently matches nothing | hook (PreToolUse) | [Guardrails](course/06-guardrails.md) | darwin only |
-| `test-email-only` | Login e-mails in tests go only to your test address | hook (PreToolUse) | [Guardrails](course/06-guardrails.md) | needs `testEmail` |
-| `forbidden-commands` | Commands you banned stay banned | hook (PreToolUse) | [Guardrails](course/06-guardrails.md) | needs `forbiddenCommands` |
-| `backup-before-overwrite` | Every file is backed up before the agent changes or deletes it | hook (PreToolUse) | [Guardrails](course/06-guardrails.md) |  |
-| `turn-corrections-into-checks` | A mistake corrected twice becomes a check | skill [`correct`](skills/correct/SKILL.md) | [Turn corrections into checks](course/07-turn-corrections-into-checks.md) |  |
-| `tests-that-prove` | A test counts only if breaking the code turns it red | skill [`test-truth`](skills/test-truth/SKILL.md) | [Tests that prove something](course/08-tests-that-prove.md) |  |
-| `no-tests-in-ci` | No test, lint or e2e steps in CI workflows | hook (PreToolUse) | [Tests that prove something](course/08-tests-that-prove.md) | off by default |
-| `map-every-feature` | Every feature is mapped and proved the way a user reaches it | skill [`verify`](skills/verify/SKILL.md) | [Map every feature](course/09-map-every-feature.md) |  |
-| `review-before-you-show` | Score your own screenshots before anyone sees them | skill [`critique`](skills/critique/SKILL.md) | [Review before you show](course/10-review-before-you-show.md) |  |
-| `screens-that-respect-people` | No screen waits, lies when empty, or hides a failure | skill [`ux-rules`](skills/ux-rules/SKILL.md) | [Screens that respect people](course/11-screens-that-respect-people.md) |  |
-| `names-and-language` | Code speaks English; screens speak the reader's language | skill [`naming`](skills/naming/SKILL.md) | [Names and language](course/12-names-and-language.md) |  |
-| `standard-webhooks` | Webhooks follow Standard Webhooks | skill [`webhooks`](skills/webhooks/SKILL.md) | [Webhooks the standard way](course/13-webhooks-the-standard-way.md) |  |
-| `mcp-in-four-tools` | A product's MCP is four tools: guide, read, write, delete | skill [`mcp-design`](skills/mcp-design/SKILL.md) | [An MCP in four tools](course/14-an-mcp-in-four-tools.md) |  |
-| `mac-apps-done-right` | A Mac app opened at login starts in the menu bar | skill [`mac-app`](skills/mac-app/SKILL.md) | [Mac apps done right](course/15-mac-apps-done-right.md) |  |
+| `principles-every-session` | The principles and your language reach every session | hook (SessionStart) | [Use it now](course/01-use-it-now.md) |  |
+| `spoken-summary` | A finished task ends with a spoken summary | hook (Stop) | [Use it now](course/01-use-it-now.md) | needs `voice.isEnabled` |
+| `start-from-the-person` | Every piece starts from the person who meets it | skill [`intent`](skills/intent/SKILL.md) | [Build for people](course/05-build-for-people.md) |  |
+| `write-like-a-person` | Write plainly: no emoji, no filler, no invented numbers | skill [`plain-writing`](skills/plain-writing/SKILL.md) | [Build for people](course/05-build-for-people.md) |  |
+| `no-emoji` | No emoji in files the agent writes | hook (PreToolUse) | [Guardrails](course/02-guardrails.md) |  |
+| `reply-in-your-language` | The agent replies in your language | hook (Stop) | [Guardrails](course/02-guardrails.md) | needs `language` |
+| `fix-with-proof` | Reproduce first, fix the root cause, explain every number | skill [`fix-with-proof`](skills/fix-with-proof/SKILL.md) | [Fix with proof](course/03-fix-with-proof.md) |  |
+| `know-what-a-change-breaks` | Prove the one fact that makes a change safe | skill [`blast-radius`](skills/blast-radius/SKILL.md) | [Fix with proof](course/03-fix-with-proof.md) |  |
+| `private-repos-stay-private` | A private repository never becomes public | hook (PreToolUse) | [Guardrails](course/02-guardrails.md) |  |
+| `stage-only-your-files` | Commit only your own files, by exact path | hook (PreToolUse) | [Guardrails](course/02-guardrails.md) |  |
+| `conventional-commits` | Commit messages follow Conventional Commits | hook (PreToolUse) | [Guardrails](course/02-guardrails.md) |  |
+| `one-package-manager` | One package manager per setup | hook (PreToolUse) | [Guardrails](course/02-guardrails.md) | needs `packageManager` |
+| `sed-word-boundary` | No \b in macOS sed, which silently matches nothing | hook (PreToolUse) | [Guardrails](course/02-guardrails.md) | darwin only |
+| `test-email-only` | Login e-mails in tests go only to your test address | hook (PreToolUse) | [Guardrails](course/02-guardrails.md) | needs `testEmail` |
+| `forbidden-commands` | Commands you banned stay banned | hook (PreToolUse) | [Guardrails](course/02-guardrails.md) | needs `forbiddenCommands` |
+| `backup-before-overwrite` | Every file is backed up before the agent changes or deletes it | hook (PreToolUse) | [Guardrails](course/02-guardrails.md) |  |
+| `turn-corrections-into-checks` | A mistake corrected twice becomes a check | skill [`correct`](skills/correct/SKILL.md) | [Guardrails](course/02-guardrails.md) |  |
+| `tests-that-prove` | A test counts only if breaking the code turns it red | skill [`test-truth`](skills/test-truth/SKILL.md) | [Prove it works](course/04-prove-it-works.md) |  |
+| `no-tests-in-ci` | No test, lint or e2e steps in CI workflows | hook (PreToolUse) | [Prove it works](course/04-prove-it-works.md) | off by default |
+| `map-every-feature` | Every feature is mapped and proved the way a user reaches it | skill [`verify`](skills/verify/SKILL.md) | [Prove it works](course/04-prove-it-works.md) |  |
+| `review-before-you-show` | Score your own screenshots before anyone sees them | skill [`critique`](skills/critique/SKILL.md) | [Prove it works](course/04-prove-it-works.md) |  |
+| `screens-that-respect-people` | No screen waits, lies when empty, or hides a failure | skill [`ux-rules`](skills/ux-rules/SKILL.md) | [Build for people](course/05-build-for-people.md) |  |
+| `names-and-language` | Code speaks English; screens speak the reader's language | skill [`naming`](skills/naming/SKILL.md) | [Build for people](course/05-build-for-people.md) |  |
+| `standard-webhooks` | Webhooks follow Standard Webhooks | skill [`webhooks`](skills/webhooks/SKILL.md) | [Build for people](course/05-build-for-people.md) |  |
+| `mcp-in-four-tools` | A product's MCP is four tools: guide, read, write, delete | skill [`mcp-design`](skills/mcp-design/SKILL.md) | [Build for people](course/05-build-for-people.md) |  |
+| `mac-apps-done-right` | A Mac app opened at login starts in the menu bar | skill [`mac-app`](skills/mac-app/SKILL.md) | [Build for people](course/05-build-for-people.md) |  |
 <!-- rules:end -->
 
 ## Requirements

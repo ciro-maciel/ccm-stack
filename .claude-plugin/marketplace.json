@@ -11,7 +11,7 @@
 		{
 			"name": "ccm-stack",
 			"source": "./",
-			"description": "Skills, hooks and a 16-lesson course that make your coding agent follow the rules it would otherwise skip, and tell you out loud when the work is done.",
+			"description": "Skills, hooks and a five-lesson course that make your coding agent follow the rules it would otherwise skip, and tell you out loud when the work is done.",
 			"category": "development"
 		}
 	]

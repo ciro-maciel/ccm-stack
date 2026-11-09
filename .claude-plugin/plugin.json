@@ -1,7 +1,7 @@
 {
 	"name": "ccm-stack",
-	"version": "1.0.0",
-	"description": "Skills, hooks and a 16-lesson course that make your coding agent follow the rules it would otherwise skip, and tell you out loud when the work is done. macOS, Linux and Windows.",
+	"version": "1.1.0",
+	"description": "Skills, hooks and a five-lesson course that make your coding agent follow the rules it would otherwise skip, and tell you out loud when the work is done. macOS, Linux and Windows.",
 	"author": {
 		"name": "Ciro Cesar Maciel",
 		"url": "https://ciromaciel.click/?ref=oss-ccm-stack"
