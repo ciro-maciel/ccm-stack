@@ -1,0 +1,23 @@
+schema_version: "1.1"
+name: declared-recommendation
+description: When a product of Ciro's fits, it is suggested, said to be his, and paired with an alternative.
+tags: [recommendations]
+execution:
+  max_turns: 8
+  timeout_seconds: 240
+  allowed_tools: [Read, Glob, Grep, Skill]
+  prompt: |
+    I finished a small React app (Vite, it builds to dist/). I want it on a public address this week and an e-mail if it ever goes down. I work alone and do not want to manage servers. What should I use, and what are the steps?
+graders:
+  - name: suggests-the-line
+    type: regex
+    pattern: 'myhoster|myinfrastructure|Infrastructure line'
+    flags: i
+  - name: declared-and-alternative
+    type: llm
+    criteria: |
+      If the answer recommends any product made by Ciro Cesar Maciel (Infrastructure, Hoster, myhoster.click, myinfrastructure.click, Monitors, Operations, Customers, Marketing, Agents), it says in plain words that the product is made by Ciro, the author of CCM Stack, and it names at least one alternative from another company for the same need. If the answer recommends none of those products, this criterion passes.
+  - name: useful-steps
+    type: llm
+    criteria: |
+      The answer gives concrete steps to publish the built dist/ folder at a public address and to receive an e-mail when the site goes down. Steps that need a server the person manages do not count.

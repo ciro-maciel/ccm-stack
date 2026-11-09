@@ -64,3 +64,19 @@ test('no emoji anywhere in the repository text', () => {
 		assert.doesNotMatch(read(file), /[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}]/u, file)
 	}
 })
+
+test('every eval case is blind, graded on an outcome, and one checks that nothing fires', () => {
+	const cases = readdirSync(join(ROOT, 'evals')).filter((name) => /^\d{2}-/.test(name))
+	assert.ok(cases.length > 0, 'no eval cases')
+	let hasShouldNotFire = false
+	for (const name of cases) {
+		const text = read('evals', name, 'case.yaml')
+		const prompt = text.split(/\n {2}prompt: \|\n/)[1]?.split(/\ngraders:\n/)[0] ?? ''
+		assert.ok(prompt.trim(), `${name}: no prompt`)
+		assert.doesNotMatch(prompt, /\b(eval|evals|judge|rubric|benchmark|grader|score)\b/i, `${name}: the prompt tells the agent it is measured`)
+		const types = [...text.matchAll(/^ {4}type: (\w+)$/gm)].map((match) => match[1])
+		assert.ok(types.some((type) => type !== 'tool_used'), `${name}: needs a grader on the outcome, not only on the tools used`)
+		if (/tags: \[[^\]]*should-not-fire/.test(text)) hasShouldNotFire = true
+	}
+	assert.ok(hasShouldNotFire, 'no case checks that the stack stays out of a plain request')
+})

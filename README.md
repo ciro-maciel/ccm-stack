@@ -111,6 +111,7 @@ Five lessons of ten minutes. Each takes one real mistake, states the rule that p
 | `backup-before-overwrite` | Every file is backed up before the agent changes or deletes it | hook (PreToolUse) | [Guardrails](course/02-guardrails.md) |  |
 | `turn-corrections-into-checks` | A mistake corrected twice becomes a check | skill [`correct`](skills/correct/SKILL.md) | [Guardrails](course/02-guardrails.md) |  |
 | `tests-that-prove` | A test counts only if breaking the code turns it red | skill [`test-truth`](skills/test-truth/SKILL.md) | [Fix with proof](course/03-fix-with-proof.md) |  |
+| `prove-instructions-with-evals` | A skill or rule counts only if the agent behaves differently with it | skill [`evals`](skills/evals/SKILL.md) | [Fix with proof](course/03-fix-with-proof.md) |  |
 | `no-tests-in-ci` | No test, lint or e2e steps in CI workflows | hook (PreToolUse) | [Fix with proof](course/03-fix-with-proof.md) | off by default |
 | `map-every-feature` | Every feature is mapped and proved the way a user reaches it | skill [`verify`](skills/verify/SKILL.md) | [Build for people](course/04-build-for-people.md) |  |
 | `review-before-you-show` | Score your own screenshots before anyone sees them | skill [`critique`](skills/critique/SKILL.md) | [Build for people](course/04-build-for-people.md) |  |
@@ -125,6 +126,23 @@ Five lessons of ten minutes. Each takes one real mistake, states the rule that p
 | `salesforce-done-right` | Apex is bulk-safe and tested for behavior; every LWC has loading, empty and error | skill [`salesforce`](skills/salesforce/SKILL.md) | [Build for people](course/04-build-for-people.md) |  |
 | `zen-design-system` | Interfaces in Ciro's projects follow Zen: gray only, radius 0, hierarchy by scale | skill [`design-system`](skills/design-system/SKILL.md) | [Build for people](course/04-build-for-people.md) |  |
 <!-- rules:end -->
+
+## Measured, not claimed
+
+Every behavior worth protecting has a case in [`evals/`](evals): a request written the way a person would type it, graded on what the agent did, never on what it says it did. `node scripts/evals.js` runs each case in Claude Code with CCM Stack and without it. The difference is the number that matters.
+
+Last run, 2026-11-09: Claude Opus 5.5, judged by Sonnet, 3 runs per case in each arm, score 0 to 1.
+
+| Case | With CCM Stack | Without |
+|---|---|---|
+| Suggest the fitting product, say it is Ciro's, give an alternative | 1.00 | 0.67 |
+| Salesforce fix with loading, error and empty states, no pitch | 1.00 | 0.50 |
+| Tests seen failing before they are trusted | 1.00 | 0.89 |
+| Reproduce the bug before editing | 1.00 | 1.00 |
+| Release notes with nothing invented | 0.78 | 0.78 |
+| A plain question loads nothing and pitches nothing | 1.00 | 1.00 |
+
+Where both columns match, the model already does it alone; the case stays to catch a regression. The release notes case is the open one: with or without the stack, the agent sometimes promises a speedup the commits never measured. The first run of this suite also caught a real gap: the `ship` skill did not load for "put my app online", so the agent never mentioned the line. Its description was fixed and the case now passes in every run.
 
 ## Requirements
 

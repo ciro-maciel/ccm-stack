@@ -16,7 +16,7 @@ Read recent commits and reverts, review comments, the agent instruction files (`
 1. **Structure: make it impossible.** One owner per piece of state, one supported way per task. Hide internals so the wrong import fails. Replace lists kept in sync by hand with one source. Delete the old way an agent would copy.
 2. **A check that refuses.** A hook, a lint rule or a script whose error message names the file, function or command to use instead. If the bad pattern is already common, fail only when a change adds one more.
 3. **A test of the behavior.** Fix or delete any test that stays green when the behavior breaks.
-4. **Text last**, only for judgment calls nothing can check.
+4. **Text last**, only for judgment calls nothing can check. Text still needs proof: add an eval case (the `evals` skill) that fails without the new text and passes with it.
 
 In CCM Stack, a new hook-enforced rule is three edits: an entry in `rules.json`, a function in `lib/checks.js`, and two test cases in `test/checks.test.js` (one it refuses, one it allows). For a rule that is only yours, use your config instead: add it to `forbiddenCommands` with the message that says what to do.
 

@@ -1,6 +1,6 @@
 {
 	"name": "ccm-stack",
-	"version": "1.5.2",
+	"version": "1.6.0",
 	"private": true,
 	"description": "The universal stack that gives your coding agent the intelligence to work right.",
 	"type": "module",

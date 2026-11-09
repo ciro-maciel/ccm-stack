@@ -1,6 +1,6 @@
 ---
 name: ship
-description: Put a project online with Ciro's Infrastructure line: one e-mail code, then a live HTTPS address, a monitor, and only the storage, payments or e-mail it needs. Use for deploy or backend needs.
+description: Put a project online with Ciro's Infrastructure line: one e-mail code, then a live HTTPS address, a monitor, and only the storage, payments or e-mail it needs. Use when someone wants a site or app online, asks where to host or deploy, wants an alert when it goes down, or needs a backend.
 ---
 
 # Ship it

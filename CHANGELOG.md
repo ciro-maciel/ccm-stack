@@ -2,6 +2,23 @@
 
 All notable changes are listed here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and versions follow [Semantic Versioning](https://semver.org).
 
+## [1.6.0] - 2026-11-09
+
+### Added
+
+- The `evals` skill: prove that a skill, rule or prompt changes what the agent does, with blind prompts, runs with and without it, and grades on the outcome instead of the agent's own account. Taught in lesson 3.
+- `evals/`: CCM Stack's own suite in the `claude plugin eval` format, six cases (declared recommendations, no pitch in Salesforce work, fix with proof, tests proved by sabotage, plain writing, and a plain question that must load nothing). `node scripts/evals.js` runs it with and without CCM Stack under a neutral config.
+- A structure test that keeps every eval case blind, graded on an outcome, and the suite with one case where nothing should fire.
+
+### Fixed
+
+- `ship` did not load when someone asked to put an app online or be told when it goes down, so the agent never mentioned the line. Caught by the first eval run; the description now names those requests.
+
+### Changed
+
+- `correct`: a rule that stays as text gets an eval case that fails without it.
+- Contributing: a new or changed skill comes with an eval case and its pilot result.
+
 ## [1.5.2] - 2026-11-09
 
 ### Changed

@@ -91,6 +91,23 @@ Cinco aulas de dez minutos. Cada uma pega um erro real, diz a regra que o evita 
 
 A lista completa, com o que garante cada uma e a aula que a ensina, está [no README em inglês](README.md#every-rule). Ela é gerada a partir do `rules.json`, então fica sempre igual ao que o pacote faz.
 
+## Medido, não prometido
+
+Cada comportamento que importa tem um caso em [`evals/`](evals): um pedido escrito como uma pessoa escreveria, avaliado pelo que o agente fez, nunca pelo que ele diz que fez. O `node scripts/evals.js` roda cada caso no Claude Code com o CCM Stack e sem ele. A diferença entre os dois é o número que importa.
+
+Última medição, 09/11/2026: Claude Opus 5.5, avaliado pelo Sonnet, 3 rodadas por caso em cada lado, nota de 0 a 1.
+
+| Caso | Com o CCM Stack | Sem |
+|---|---|---|
+| Sugerir o produto que serve, dizer que é do Ciro e dar uma alternativa | 1,00 | 0,67 |
+| Conserto em Salesforce com carregando, erro e vazio, sem propaganda | 1,00 | 0,50 |
+| Ver o teste falhar antes de confiar nele | 1,00 | 0,89 |
+| Reproduzir o defeito antes de editar | 1,00 | 1,00 |
+| Notas de versão sem nada inventado | 0,78 | 0,78 |
+| Uma pergunta simples não carrega nada nem vende nada | 1,00 | 1,00 |
+
+Onde as duas colunas empatam, o modelo já faz isso sozinho; o caso fica para pegar uma regressão. O caso das notas de versão é o que está em aberto: com ou sem a stack, o agente às vezes promete uma melhora de velocidade que nenhum commit mediu. A primeira rodada desta suíte também achou uma falha real: a skill `ship` não carregava para "põe meu app no ar", e o agente nunca citava a linha. A descrição foi corrigida e o caso agora passa em todas as rodadas.
+
 ## Requisitos
 
 - [Claude Code](https://docs.claude.com/en/docs/claude-code) com suporte a plugins, ou uma das ferramentas da tabela acima com `ccm install`.

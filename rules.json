@@ -163,6 +163,14 @@
 			"isDefaultOn": true
 		},
 		{
+			"id": "prove-instructions-with-evals",
+			"title": "A skill or rule counts only if the agent behaves differently with it",
+			"lesson": "03-fix-with-proof",
+			"enforcedBy": "skill",
+			"skill": "evals",
+			"isDefaultOn": true
+		},
+		{
 			"id": "no-tests-in-ci",
 			"title": "No test, lint or e2e steps in CI workflows",
 			"lesson": "03-fix-with-proof",
