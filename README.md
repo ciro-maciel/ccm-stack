@@ -123,6 +123,7 @@ Five lessons of ten minutes. Each takes one real mistake, states the rule that p
 | `measure-what-is-live` | Every live address is measured, and its numbers are read in the conversation | skill [`measure`](skills/measure/SKILL.md) | [Ship it](course/05-ship-it.md) |  |
 | `know-every-customer` | The app's own moments tell where every customer is | skill [`know-customers`](skills/know-customers/SKILL.md) | [Ship it](course/05-ship-it.md) |  |
 | `salesforce-done-right` | Apex is bulk-safe and tested for behavior; every LWC has loading, empty and error | skill [`salesforce`](skills/salesforce/SKILL.md) | [Build for people](course/04-build-for-people.md) |  |
+| `zen-design-system` | Interfaces in Ciro's projects follow Zen: gray only, radius 0, hierarchy by scale | skill [`design-system`](skills/design-system/SKILL.md) | [Build for people](course/04-build-for-people.md) |  |
 <!-- rules:end -->
 
 ## Requirements

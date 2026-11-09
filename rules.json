@@ -257,6 +257,14 @@
 			"enforcedBy": "skill",
 			"skill": "salesforce",
 			"isDefaultOn": true
+		},
+		{
+			"id": "zen-design-system",
+			"title": "Interfaces in Ciro's projects follow Zen: gray only, radius 0, hierarchy by scale",
+			"lesson": "04-build-for-people",
+			"enforcedBy": "skill",
+			"skill": "design-system",
+			"isDefaultOn": true
 		}
 	]
 }
