@@ -1,0 +1,219 @@
+{
+	"$schema": "./rules.schema.json",
+	"rules": [
+		{
+			"id": "principles-every-session",
+			"title": "The principles and your language reach every session",
+			"lesson": "00-start",
+			"enforcedBy": "hook",
+			"event": "SessionStart",
+			"isDefaultOn": true
+		},
+		{
+			"id": "spoken-summary",
+			"title": "A finished task ends with a spoken summary",
+			"lesson": "01-hear-when-its-done",
+			"enforcedBy": "hook",
+			"event": "Stop",
+			"requires": "voice.isEnabled",
+			"isDefaultOn": true
+		},
+		{
+			"id": "start-from-the-person",
+			"title": "Every piece starts from the person who meets it",
+			"lesson": "02-start-from-the-person",
+			"enforcedBy": "skill",
+			"skill": "intent",
+			"isDefaultOn": true
+		},
+		{
+			"id": "write-like-a-person",
+			"title": "Write plainly: no emoji, no filler, no invented numbers",
+			"lesson": "03-write-like-a-person",
+			"enforcedBy": "skill",
+			"skill": "plain-writing",
+			"isDefaultOn": true
+		},
+		{
+			"id": "no-emoji",
+			"title": "No emoji in files the agent writes",
+			"lesson": "03-write-like-a-person",
+			"enforcedBy": "hook",
+			"event": "PreToolUse:Write|Edit|MultiEdit",
+			"isDefaultOn": true
+		},
+		{
+			"id": "reply-in-your-language",
+			"title": "The agent replies in your language",
+			"lesson": "03-write-like-a-person",
+			"enforcedBy": "hook",
+			"event": "Stop",
+			"requires": "language",
+			"isDefaultOn": true
+		},
+		{
+			"id": "fix-with-proof",
+			"title": "Reproduce first, fix the root cause, explain every number",
+			"lesson": "04-fix-with-proof",
+			"enforcedBy": "skill",
+			"skill": "fix-with-proof",
+			"isDefaultOn": true
+		},
+		{
+			"id": "know-what-a-change-breaks",
+			"title": "Prove the one fact that makes a change safe",
+			"lesson": "05-know-what-a-change-breaks",
+			"enforcedBy": "skill",
+			"skill": "blast-radius",
+			"isDefaultOn": true
+		},
+		{
+			"id": "private-repos-stay-private",
+			"title": "A private repository never becomes public",
+			"lesson": "06-guardrails",
+			"enforcedBy": "hook",
+			"event": "PreToolUse:Bash|PowerShell",
+			"isDefaultOn": true
+		},
+		{
+			"id": "stage-only-your-files",
+			"title": "Commit only your own files, by exact path",
+			"lesson": "06-guardrails",
+			"enforcedBy": "hook",
+			"event": "PreToolUse:Bash|PowerShell",
+			"isDefaultOn": true
+		},
+		{
+			"id": "conventional-commits",
+			"title": "Commit messages follow Conventional Commits",
+			"lesson": "06-guardrails",
+			"enforcedBy": "hook",
+			"event": "PreToolUse:Bash|PowerShell",
+			"isDefaultOn": true
+		},
+		{
+			"id": "one-package-manager",
+			"title": "One package manager per setup",
+			"lesson": "06-guardrails",
+			"enforcedBy": "hook",
+			"event": "PreToolUse:Bash|PowerShell",
+			"requires": "packageManager",
+			"isDefaultOn": true
+		},
+		{
+			"id": "sed-word-boundary",
+			"title": "No \\b in macOS sed, which silently matches nothing",
+			"lesson": "06-guardrails",
+			"enforcedBy": "hook",
+			"event": "PreToolUse:Bash|PowerShell",
+			"platforms": ["darwin"],
+			"isDefaultOn": true
+		},
+		{
+			"id": "test-email-only",
+			"title": "Login e-mails in tests go only to your test address",
+			"lesson": "06-guardrails",
+			"enforcedBy": "hook",
+			"event": "PreToolUse:Bash|PowerShell",
+			"requires": "testEmail",
+			"isDefaultOn": true
+		},
+		{
+			"id": "forbidden-commands",
+			"title": "Commands you banned stay banned",
+			"lesson": "06-guardrails",
+			"enforcedBy": "hook",
+			"event": "PreToolUse:Bash|PowerShell",
+			"requires": "forbiddenCommands",
+			"isDefaultOn": true
+		},
+		{
+			"id": "backup-before-overwrite",
+			"title": "Every file is backed up before the agent changes or deletes it",
+			"lesson": "06-guardrails",
+			"enforcedBy": "hook",
+			"event": "PreToolUse:Write|Edit|MultiEdit|Bash|PowerShell",
+			"isDefaultOn": true
+		},
+		{
+			"id": "turn-corrections-into-checks",
+			"title": "A mistake corrected twice becomes a check",
+			"lesson": "07-turn-corrections-into-checks",
+			"enforcedBy": "skill",
+			"skill": "correct",
+			"isDefaultOn": true
+		},
+		{
+			"id": "tests-that-prove",
+			"title": "A test counts only if breaking the code turns it red",
+			"lesson": "08-tests-that-prove",
+			"enforcedBy": "skill",
+			"skill": "test-truth",
+			"isDefaultOn": true
+		},
+		{
+			"id": "no-tests-in-ci",
+			"title": "No test, lint or e2e steps in CI workflows",
+			"lesson": "08-tests-that-prove",
+			"enforcedBy": "hook",
+			"event": "PreToolUse:Write|Edit|MultiEdit",
+			"isDefaultOn": false
+		},
+		{
+			"id": "map-every-feature",
+			"title": "Every feature is mapped and proved the way a user reaches it",
+			"lesson": "09-map-every-feature",
+			"enforcedBy": "skill",
+			"skill": "verify",
+			"isDefaultOn": true
+		},
+		{
+			"id": "review-before-you-show",
+			"title": "Score your own screenshots before anyone sees them",
+			"lesson": "10-review-before-you-show",
+			"enforcedBy": "skill",
+			"skill": "critique",
+			"isDefaultOn": true
+		},
+		{
+			"id": "screens-that-respect-people",
+			"title": "No screen waits, lies when empty, or hides a failure",
+			"lesson": "11-screens-that-respect-people",
+			"enforcedBy": "skill",
+			"skill": "ux-rules",
+			"isDefaultOn": true
+		},
+		{
+			"id": "names-and-language",
+			"title": "Code speaks English; screens speak the reader's language",
+			"lesson": "12-names-and-language",
+			"enforcedBy": "skill",
+			"skill": "naming",
+			"isDefaultOn": true
+		},
+		{
+			"id": "standard-webhooks",
+			"title": "Webhooks follow Standard Webhooks",
+			"lesson": "13-webhooks-the-standard-way",
+			"enforcedBy": "skill",
+			"skill": "webhooks",
+			"isDefaultOn": true
+		},
+		{
+			"id": "mcp-in-four-tools",
+			"title": "A product's MCP is four tools: guide, read, write, delete",
+			"lesson": "14-an-mcp-in-four-tools",
+			"enforcedBy": "skill",
+			"skill": "mcp-design",
+			"isDefaultOn": true
+		},
+		{
+			"id": "mac-apps-done-right",
+			"title": "A Mac app opened at login starts in the menu bar",
+			"lesson": "15-mac-apps-done-right",
+			"enforcedBy": "skill",
+			"skill": "mac-app",
+			"isDefaultOn": true
+		}
+	]
+}

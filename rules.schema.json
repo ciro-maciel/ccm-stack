@@ -1,0 +1,34 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://github.com/ciro-maciel/ccm-stack/rules.schema.json",
+	"title": "CCM Stack rules",
+	"description": "The single source of every rule: what it says, which lesson teaches it, and what enforces it.",
+	"type": "object",
+	"required": ["rules"],
+	"properties": {
+		"$schema": { "type": "string" },
+		"rules": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"additionalProperties": false,
+				"required": ["id", "title", "lesson", "enforcedBy", "isDefaultOn"],
+				"properties": {
+					"id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+					"title": { "type": "string" },
+					"lesson": { "type": "string", "pattern": "^[0-9]{2}-[a-z0-9-]+$" },
+					"enforcedBy": { "enum": ["hook", "skill"] },
+					"event": { "type": "string" },
+					"skill": { "type": "string" },
+					"requires": { "type": "string", "description": "Config key that must be set for the rule to run." },
+					"platforms": { "type": "array", "items": { "enum": ["darwin", "linux", "win32"] } },
+					"isDefaultOn": { "type": "boolean" }
+				},
+				"allOf": [
+					{ "if": { "properties": { "enforcedBy": { "const": "hook" } } }, "then": { "required": ["event"] } },
+					{ "if": { "properties": { "enforcedBy": { "const": "skill" } } }, "then": { "required": ["skill"] } }
+				]
+			}
+		}
+	}
+}

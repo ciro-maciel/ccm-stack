@@ -1,0 +1,55 @@
+---
+name: setup
+description: Configure CCM Stack for this person - their language, the spoken summary and its voice, their package manager, test e-mail and banned commands. Use for /ccm-stack:setup, "configure ccm", "change my language", "turn the voice on", or when the session says CCM Stack is not configured.
+---
+
+# Set up CCM Stack
+
+Every setting belongs to the person. Ask, never guess. Their answers go to their own config file, never to a repository.
+
+The CLI lives two folders above this skill's base directory. Call it as `node "<base>/../../bin/ccm.js" <command>` and use the full path you were given.
+
+## 1. Look first
+
+Run `ccm config` and `ccm doctor`. Tell the person, in one or two lines, what is already set and what this machine can do.
+
+## 2. Ask, in one round
+
+Ask with your question tool, one question per topic, each standing on its own:
+
+1. **Language.** The language you reply in and the summary is spoken in. Offer English, Português (Brasil), Español, Français, Deutsch; "Other" takes any BCP 47 tag.
+2. **Spoken summary.** On or off. When on, the voice engine:
+   - **Phonon** (recommended): runs on this machine, free, no account. English is Apache-2.0, free for any use. Portuguese, Spanish, French and German are **CC BY-NC 4.0: non-commercial use only.** Say this plainly.
+   - **System voice**: the voice built into the OS, free, any use.
+   - **Fish Audio**: cloud voice with the person's own `FISH_API_KEY`, billed to their account.
+3. **Commercial use.** Only when the language model is non-commercial: "Will you use this at work, for a company?" If yes, Phonon is not allowed for that language; offer the system voice or Fish.
+4. **Package manager.** bun, npm, pnpm, yarn, or none.
+5. **Test e-mail** (optional). The one address login and code flows may send to in tests.
+
+## 3. Save
+
+```
+ccm config set language <tag>
+ccm config set voice.isEnabled true|false
+ccm config set voice.engine phonon|system|fish
+ccm config set voice.isCommercialUse true|false
+ccm config set packageManager <name>
+ccm config set testEmail <address>
+```
+
+For a banned command, add an entry to `forbiddenCommands` with `pattern` (a regular expression) and `message` (what to do instead), then save the whole list with `ccm config set forbiddenCommands '<json array>'`.
+
+## 4. Install the voice
+
+For Phonon, run `ccm voice install`. It downloads the official binary for this system from Gradium's releases and refuses it if the checksum differs.
+
+The non-English models are gated on Hugging Face. Before the first test, the person must:
+
+1. Open the model page (`ccm voice models` lists them) and accept the license with their Hugging Face account.
+2. Create a read token at huggingface.co/settings/tokens and export it as `HF_TOKEN`.
+
+After the first download, the model loads from the cache with no token and no network.
+
+## 5. Prove it
+
+Run `ccm voice test` with a sentence in the chosen language, then ask the person whether they heard it. If not, run `ccm doctor` and fix the first missing piece. Finish with `ccm status`, and tell them the new settings take effect in the next session.

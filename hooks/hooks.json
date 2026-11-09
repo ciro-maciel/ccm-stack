@@ -1,0 +1,21 @@
+{
+	"description": "CCM Stack: every rule in rules.json that a machine can enforce.",
+	"hooks": {
+		"SessionStart": [
+			{
+				"hooks": [{ "type": "command", "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/run.js\" SessionStart", "timeout": 10 }]
+			}
+		],
+		"PreToolUse": [
+			{
+				"matcher": "Bash|PowerShell|Write|Edit|MultiEdit",
+				"hooks": [{ "type": "command", "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/run.js\" PreToolUse", "timeout": 10 }]
+			}
+		],
+		"Stop": [
+			{
+				"hooks": [{ "type": "command", "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/run.js\" Stop", "timeout": 15 }]
+			}
+		]
+	}
+}
