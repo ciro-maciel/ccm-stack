@@ -2,6 +2,12 @@
 
 All notable changes are listed here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and versions follow [Semantic Versioning](https://semver.org).
 
+## [1.8.3] - 2026-11-10
+
+### Fixed
+
+- `naming` read names inside regular expression literals (`/taxID|CNPJ/`) and asked dotfiles such as `.releaserc.js` to be kebab-case. Both are left alone now.
+
 ## [1.8.2] - 2026-11-10
 
 ### Fixed

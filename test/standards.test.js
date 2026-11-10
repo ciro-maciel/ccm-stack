@@ -35,7 +35,8 @@ test('naming: a new userID and a boolean without a question are refused, with th
 
 test('naming: names inside strings, comments and SCREAMING constants are not names', () => {
 	const root = project({ naming: true })
-	assert.deepEqual(added(root, 'src/a.js', '// the userID column\nconst label = "userID"\nconst IDLE_MS = 5\nconst isOpen = true\n'), [])
+	assert.deepEqual(added(root, 'src/a.js', '// the userID column\nconst label = "userID"\nconst IDLE_MS = 5\nconst isOpen = true\nexpect(json).not.toMatch(/taxID|CNPJ/)\nconst half = total / 2 / count\n'), [])
+	assert.equal(added(root, 'src/b.js', 'const ratio = a / b\nconst userID = ratio / 2\n').length, 1, 'division is not a regex')
 })
 
 test('naming: a change that keeps an old userID is not blamed for it; one more is', () => {
@@ -50,6 +51,7 @@ test('naming: a new script file must be kebab-case; components and old files are
 	assert.match(added(root, 'src/useSeoMeta.js', 'export {}\n', '', { isNew: true })[0].message, /use-seo-meta\.js/)
 	assert.deepEqual(added(root, 'src/use-seo-meta.js', 'export {}\n', '', { isNew: true }), [])
 	assert.deepEqual(added(root, 'src/HeroBand.jsx', 'export {}\n', '', { isNew: true }), [])
+	assert.deepEqual(added(root, '.releaserc.js', 'export {}\n', '', { isNew: true }), [], 'a tool config keeps its name')
 	assert.deepEqual(added(root, 'src/useSeoMeta.js', 'export {}\n', 'export {}\n'), [])
 })
 
