@@ -2,6 +2,12 @@
 
 All notable changes are listed here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and versions follow [Semantic Versioning](https://semver.org).
 
+## [1.8.2] - 2026-11-10
+
+### Fixed
+
+- `zen` refused inset shadows, which draw a line inside a box (a border by other means). Only shadows that add depth are refused now.
+
 ## [1.8.1] - 2026-11-10
 
 ### Fixed

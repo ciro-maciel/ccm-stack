@@ -81,7 +81,7 @@ test('zen: radius, shadows, colors, weights and other icon sets are refused; red
 	].join('\n')
 	assert.equal(added(root, 'src/a.jsx', bad).length, 8)
 	assert.deepEqual(added(root, 'src/b.jsx', '<Text c="red.6" fw={700}>Falhou</Text>\n'), [])
-	assert.deepEqual(added(root, 'src/c.css', '.card { box-shadow: none; border: 1px solid var(--mantine-color-gray-2) }\n'), [])
+	assert.deepEqual(added(root, 'src/c.css', '.card { box-shadow: none; border: 1px solid var(--mantine-color-gray-2) }\n.tab { box-shadow: inset 0 -2px 0 var(--mantine-color-gray-9) }\n'), [])
 	assert.deepEqual(added(root, 'worker/mail.js', "const html = '<p style=\"color:#1a1a1a\">'\n"), [], 'e-mail HTML in a worker needs hex')
 })
 
