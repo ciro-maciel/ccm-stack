@@ -135,11 +135,13 @@ test('api-keys: a key id in a presigned URL and a Google browser key are public,
 test('zen shown by evidence holds only the screens of the app that uses the kit', () => {
 	const root = project(null, {
 		'apps/panel/package.json': JSON.stringify({ dependencies: { '@ciromaciel/components-kit': '1.0.0' } }),
+		'apps/admin/package.json': JSON.stringify({ dependencies: { '@ciromaciel/dashboard-kit': '1.0.0' } }),
 		'apps/mail/package.json': JSON.stringify({ dependencies: { 'react-email': '1.0.0' } }),
 	})
 	spawnSync('git', ['init', '-q'], { cwd: root })
 	spawnSync('git', ['add', '.'], { cwd: root })
 	const card = '<Paper radius="md" />\n'
 	assert.equal(added(root, 'apps/panel/src/card.jsx', card).length, 1)
+	assert.equal(added(root, 'apps/admin/src/card.jsx', card).length, 1, 'the panel kit is Zen too')
 	assert.deepEqual(added(root, 'apps/mail/src/card.jsx', card), [])
 })

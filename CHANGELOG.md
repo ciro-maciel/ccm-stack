@@ -2,6 +2,12 @@
 
 All notable changes are listed here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and versions follow [Semantic Versioning](https://semver.org).
 
+## [1.8.1] - 2026-11-10
+
+### Fixed
+
+- The `zen` pack only recognized `@ciromaciel/components-kit`, so panels built on `@ciromaciel/dashboard-kit` were never held to Zen. Both kits now count.
+
 ## [1.8.0] - 2026-11-10
 
 ### Added
