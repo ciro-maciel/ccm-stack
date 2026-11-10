@@ -4,5 +4,7 @@
 		"naming": true,
 		"api-keys": true
 	},
-	"ignore": []
+	"ignore": [
+		"evals/12-key-in-code"
+	]
 }
