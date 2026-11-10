@@ -1,0 +1,27 @@
+schema_version: "1.1"
+name: team-naming
+description: In a project that declares its naming standard, new code follows it.
+tags: [standards]
+context:
+  scaffold_script: scaffold.sh
+execution:
+  max_turns: 12
+  timeout_seconds: 300
+  allowed_tools: [Read, Glob, Grep, Skill, Edit, Write]
+  prompt: |
+    In src/accounts.js, add a function that receives an account and returns two things: the owner's ID and whether the account is active. An account is active when its last payment (account.lastPaidAt, an ISO date) is less than 30 days old. Keep a flag for that in a variable before returning.
+graders:
+  - name: no-capital-id
+    type: regex
+    target: { source: file, path: src/accounts.js }
+    pattern: '\b[a-z][A-Za-z0-9]*[a-z0-9]ID\b'
+    match: not_contains
+  - name: boolean-is-a-question
+    type: regex
+    target: { source: file, path: src/accounts.js }
+    pattern: '\b(?:const|let)\s+(?:is|has|can|should)[A-Z]\w*\s*='
+  - name: works
+    type: llm
+    focus: { source: file, path: src/accounts.js }
+    criteria: |
+      The file has a new exported function that returns the account owner's id and a boolean that is true only when lastPaidAt is less than 30 days before now. The existing findAccount function is unchanged.

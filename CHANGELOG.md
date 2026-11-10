@@ -2,6 +2,15 @@
 
 All notable changes are listed here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and versions follow [Semantic Versioning](https://semver.org).
 
+## [1.8.0] - 2026-11-10
+
+### Added
+
+- Project standards: a project declares packs in `ccm.standards.json`, and every write and every commit is checked against them. Only what a change adds is refused, so a standard adopted today never blocks work on older code. A line that is a real exception says why: `// ccm: allow <reason>`.
+- Three packs. `api-keys` (always on): no secret in code or in a commit, with the house prefixes and the common formats of other services. `naming` (when declared): `Id` never `ID`, booleans as affirmative questions, kebab-case script files. `zen` (by evidence, app by app): radius 0, no shadows, gray only, Montserrat 500-900, Tabler icons.
+- `ccm standards`, `ccm standards report` and `ccm standards init [--write]`: which packs run and why, the whole tree file by file, and a proposal measured from what the project already does.
+- The `standards` skill, taught in lesson 2, and two eval cases (a team's naming, a key given in the conversation).
+
 ## [1.7.0] - 2026-11-09
 
 ### Added

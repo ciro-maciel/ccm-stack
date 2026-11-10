@@ -52,6 +52,14 @@
 			"isDefaultOn": true
 		},
 		{
+			"id": "follow-project-standards",
+			"title": "Code follows the standards the project declares, checked on every write and commit",
+			"lesson": "02-guardrails",
+			"enforcedBy": "hook",
+			"event": "PreToolUse:Write|Edit|MultiEdit",
+			"isDefaultOn": true
+		},
+		{
 			"id": "reply-in-your-language",
 			"title": "The agent replies in your language",
 			"lesson": "02-guardrails",

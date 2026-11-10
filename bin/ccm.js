@@ -29,6 +29,11 @@ const HELP = `ccm: your CCM Stack
                                             cursor, codex, gemini-cli, copilot (default all), plus git hooks
   ccm check pre-commit | commit-msg <file>  what the git hooks run
 
+  ccm standards [dir]                       which packs run in this project, and why
+  ccm standards report [dir]                the whole tree against every pack, file by file
+  ccm standards init [dir] [--write]        measure what the project already does and propose
+                                            ccm.standards.json (written only with --write)
+
   ccm line                                  sign-in state and every MCP server of the line
   ccm line facts [line]                     free plan, prices and alternatives, to quote as they are
   ccm line login <email> [code] [--line <line>]
@@ -235,10 +240,34 @@ async function checkCommand([stage, file]) {
 	print('usage: ccm check pre-commit | ccm check commit-msg <file>')
 }
 
+async function standardsCommand([action, ...rest]) {
+	const standards = await import('../lib/standards/index.js')
+	const isAction = ['report', 'init'].includes(action)
+	const target = (isAction ? rest : [action, ...rest]).find((word) => word && !word.startsWith('--')) || process.cwd()
+	const root = standards.projectRoot(target)
+	if (action === 'report') {
+		const { rows, isDeclared } = standards.report(root)
+		print(`${root}${isDeclared ? '' : ` (no ${standards.FILE_NAME} yet: ccm standards init)`}`)
+		for (const row of rows) {
+			print('', `${row.pack.padEnd(9)} ${row.isActive ? 'on ' : 'off'}  ${row.clean} of ${row.checked} files clean, ${row.total} finding(s)  (${row.why})`)
+			for (const worst of row.worst) print(`  ${String(worst.count).padStart(4)}  ${worst.file}: ${worst.first.message}`)
+		}
+		return
+	}
+	if (action === 'init') {
+		const { file, reasons } = standards.propose(root)
+		print(`Measured ${root}:`, ...reasons.map((reason) => `- ${reason}`), '', JSON.stringify(file, null, '\t'))
+		if (!rest.includes('--write')) return print('', `Nothing written. Agree with the team, then: ccm standards init ${rest.find((word) => !word.startsWith('--')) || '.'} --write`)
+		return print('', `written: ${standards.writeStandards(root, file)}`)
+	}
+	for (const { pack, isActive, why } of standards.activePacks(root)) print(`${pack.id.padEnd(9)} ${isActive ? 'on ' : 'off'}  ${why}`)
+}
+
 async function main() {
 	if (command === 'install') return installCommand(args)
 	if (command === 'check') return checkCommand(args)
 	if (command === 'line') return line(args)
+	if (command === 'standards') return standardsCommand(args)
 	if (command === 'status') return status()
 	if (command === 'doctor') return doctor()
 	if (command === 'config') {

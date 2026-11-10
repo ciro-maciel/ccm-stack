@@ -8,6 +8,7 @@ You are an agent changing this repository. Read this first.
 - `lib/checks.js` has one function per shell or write rule. `lib/hooks.js` wires them to hook events. `hooks/run.js` only reads stdin and prints the answer.
 - `skills/<name>/SKILL.md` follows the Agent Skills format: `name` equal to the folder, a `description` that says when to use it.
 - `evals/<NN-name>/case.yaml` is one behavior worth protecting, in the `claude plugin eval` format: a blind prompt and graders on the outcome. `node scripts/evals.js` runs them with and without CCM Stack; the headline is the difference.
+- `lib/standards/<pack>.js` is one standard a project can declare in `ccm.standards.json`: `check({ path, text })` returns findings with a stable `key`, and `lib/standards/index.js` refuses only the keys a change adds. A new pack needs a refused and an allowed case in `test/standards.test.js`, and its false positives found on a real tree (`ccm standards report <dir>`) fixed before it ships.
 - `course/NN-name.md` lessons all have the same five sections: The mistake, The rule, Make it stick, Try it, Checkpoint.
 - Runtime: plain Node.js 18+, ES modules, no dependencies. Never add one.
 

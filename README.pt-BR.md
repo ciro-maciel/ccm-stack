@@ -49,6 +49,24 @@ O `ccm line facts` mostra o que é grátis, quanto custa cada plano e uma altern
 
 As chaves vão para o arquivo de ambiente do projeto, fora do git, e nunca para a tela. `ccm line` lista os 21 servidores MCP da linha: Infrastructure, Operations, Customers, Marketing e Agents.
 
+## Padrões do projeto
+
+Os padrões de uma equipe costumam morar num documento que agentes e pessoas esquecem. O CCM Stack os guarda no `ccm.standards.json`, dentro do repositório, e confere quando o agente grava um arquivo, de novo em cada commit e, quando você pede, na árvore inteira. Só o que uma mudança acrescenta é recusado, então adotar um padrão nunca trava o trabalho no código antigo.
+
+```
+ccm standards init          # mede o que o projeto já faz e propõe o arquivo
+ccm standards init --write  # quando a equipe concordar
+ccm standards report        # cada pacote, com os arquivos que mais se desviam
+```
+
+| Pacote | Confere | Liga |
+|---|---|---|
+| `api-keys` | Nenhum segredo no código nem no commit; o lugar deles é o arquivo de ambiente | Sempre |
+| `naming` | `Id` e nunca `ID`, booleanos como pergunta afirmativa, arquivos de script em kebab-case | Quando declarado |
+| `zen` | Raio 0, sem sombra, só cinza, Montserrat 500 a 900, ícones Tabler | Quando o projeto usa o `@ciromaciel/components-kit`, ou declarado |
+
+Uma exceção de verdade diz o motivo na própria linha: `// ccm: allow <motivo>`. A skill `standards` conduz a equipe por isso.
+
 ## Funciona onde você já trabalha
 
 | Ferramenta | Como o CCM Stack chega lá |

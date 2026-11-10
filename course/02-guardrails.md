@@ -1,6 +1,6 @@
 # 02 · Guardrails
 
-**Lesson 2 of 5** · 10 minutes · [Previous](01-use-it-now.md) · [Next: Fix with proof](03-fix-with-proof.md) · Skill: [`correct`](../skills/correct/SKILL.md)
+**Lesson 2 of 5** · 10 minutes · [Previous](01-use-it-now.md) · [Next: Fix with proof](03-fix-with-proof.md) · Skills: [`correct`](../skills/correct/SKILL.md), [`standards`](../skills/standards/SKILL.md)
 
 ## The mistake
 
@@ -24,10 +24,13 @@ Hooks that run before every command and file write, and when the agent stops:
 | `test-email-only` | Login or code requests to any address but your test one | Your test address |
 | `forbidden-commands` | Commands you banned | Your own message |
 | `no-emoji` | A file write that adds an emoji | A word or an icon |
+| `follow-project-standards` | A write or commit that adds a deviation from `ccm.standards.json`: a secret in code always; `userID` or a non-question boolean, and the Zen design rules, where the project declares them | The fix, named in the refusal |
 | `reply-in-your-language` | A reply in another language (sent back once) | The same reply, in yours |
 | `backup-before-overwrite` | Nothing: it copies the file, or the folder a plain `rm` deletes, aside first | Restore from the backups folder |
 
 Backups go to `~/.config/ccm-stack/backups` on Linux and macOS, or `%APPDATA%\ccm-stack\backups` on Windows: one copy per file per day, the state before the agent touched it.
+
+Your team's conventions are guardrails too. `ccm standards init` measures what the project already does and proposes `ccm.standards.json`; once it is committed, every agent and every commit follows it, and only what a change adds is refused, so the older code never blocks you.
 
 When you catch yourself correcting the same thing twice, run `/ccm-stack:correct`. It finds the repeated mistakes in your history and turns each one into a check, from the highest level that works: structure, then a hook or lint, then a test, and written text only for judgment calls.
 
@@ -42,7 +45,8 @@ When you catch yourself correcting the same thing twice, run `/ccm-stack:correct
    ```
 
    Ask the agent to run `terraform destroy` and read your own message coming back.
+4. In one of your projects: `ccm standards init`. Read how much of the code already follows each standard, agree on the file, and write it with `--write`.
 
 ## Checkpoint
 
-You restored a file from the backups folder, and one of your own corrections is now a check instead of a line of text.
+You restored a file from the backups folder, one of your own corrections is now a check instead of a line of text, and your project has a `ccm.standards.json` the whole team follows.

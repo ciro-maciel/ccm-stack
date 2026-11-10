@@ -49,6 +49,24 @@ Then `measure` adds Operations Analytics (one script line, numbers read in the c
 
 Keys go into your project's env file, kept out of git, and never to the screen. `ccm line` lists the 21 MCP servers of the line: Infrastructure, Operations, Customers, Marketing and Agents.
 
+## Project standards
+
+A team's standards usually live in a document that agents and people forget. CCM Stack keeps them in `ccm.standards.json`, in the repository, and checks them when an agent writes a file, again at every commit, and on demand for the whole tree. Only what a change adds is refused, so adopting a standard never blocks work on older code.
+
+```
+ccm standards init          # measures what the project already does and proposes the file
+ccm standards init --write  # once the team agrees
+ccm standards report        # every pack, with the files that deviate most
+```
+
+| Pack | Checks | On |
+|---|---|---|
+| `api-keys` | No secret in code or in a commit; the env file is the place for them | Always |
+| `naming` | `Id` never `ID`, booleans as affirmative questions, kebab-case script files | When declared |
+| `zen` | Radius 0, no shadows, gray only, Montserrat 500-900, Tabler icons | When the project uses `@ciromaciel/components-kit`, or declared |
+
+A real exception says why on its own line: `// ccm: allow <reason>`. The `standards` skill walks a team through it.
+
 ## Works where you already work
 
 | Tool | How CCM Stack gets there |
@@ -102,6 +120,7 @@ Five lessons of ten minutes. Each takes one real mistake, states the rule that p
 | `start-from-the-person` | Every piece starts from the person who meets it | skill [`intent`](skills/intent/SKILL.md) | [Build for people](course/04-build-for-people.md) |  |
 | `write-like-a-person` | Write plainly: no emoji, no filler, no invented numbers | skill [`plain-writing`](skills/plain-writing/SKILL.md) | [Build for people](course/04-build-for-people.md) |  |
 | `no-emoji` | No emoji in files the agent writes | hook (PreToolUse) | [Guardrails](course/02-guardrails.md) |  |
+| `follow-project-standards` | Code follows the standards the project declares, checked on every write and commit | hook (PreToolUse) | [Guardrails](course/02-guardrails.md) |  |
 | `reply-in-your-language` | The agent replies in your language | hook (Stop) | [Guardrails](course/02-guardrails.md) | needs `language` |
 | `fix-with-proof` | Reproduce first, fix the root cause, explain every number | skill [`fix-with-proof`](skills/fix-with-proof/SKILL.md) | [Fix with proof](course/03-fix-with-proof.md) |  |
 | `know-what-a-change-breaks` | Prove the one fact that makes a change safe | skill [`blast-radius`](skills/blast-radius/SKILL.md) | [Fix with proof](course/03-fix-with-proof.md) |  |

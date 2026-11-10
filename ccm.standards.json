@@ -1,0 +1,8 @@
+{
+	"$comment": "Project standards checked by CCM Stack: https://github.com/ciro-maciel/ccm-stack#project-standards",
+	"packs": {
+		"naming": true,
+		"api-keys": true
+	},
+	"ignore": []
+}
